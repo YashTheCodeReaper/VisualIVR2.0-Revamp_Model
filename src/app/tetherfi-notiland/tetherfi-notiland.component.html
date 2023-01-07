@@ -1,0 +1,12 @@
+<div class="notiland-notch-box" *ngIf="warnMessage && warnIcon">
+  <div class="notch" [ngClass]="{'expanded-notch': isNotchClicked, 'notch-hover': !isNotchClicked}" (click)="onNotchClick()">
+    <mat-icon>{{warnIcon}}</mat-icon>
+    <div class="content-main">
+      <p>{{warnMessage}}</p>
+    </div>
+    <div class="action-buttons">
+      <p (click)="onAccept()">OK</p>
+      <p (click)="onDecline()">CANCEL</p>
+    </div>
+  </div>
+</div>

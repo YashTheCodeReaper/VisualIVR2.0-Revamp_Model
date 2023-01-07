@@ -1,0 +1,152 @@
+.notiland-notch-box {
+  position: fixed;
+  top: -10rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: notchContainerAnimation 0.33s cubic-bezier(.666, 0, .4, 1.2);
+  animation-fill-mode: forwards;
+  transition: all 0.33s cubic-bezier(.666, 0, .4, 1.2);
+  user-select: none;
+
+  .notch {
+    position: relative;
+    background: #6a26da;
+    width: 2.5rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50px;
+    transition: all 0.33s cubic-bezier(.666, 0, .4, 1.2);
+    overflow: hidden;
+
+    mat-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1.4rem;
+      height: 1.4rem;
+      font-size: 1.4rem;
+      color: #fff;
+      transition: all 0.33s cubic-bezier(.666, 0, .4, 1.2);
+    }
+
+    .content-main {
+      width: 0rem;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      margin-left: 3.5rem;
+      margin-right: 1rem;
+      transition: all 0.33s cubic-bezier(.666, 0, .4, 1.2);
+
+      p {
+        font-size: 1.2rem;
+        color: #fff;
+        width: 100%;
+        font-weight: 400;
+        position: absolute;
+        top: 50%;
+        left: 5%;
+        width: max-content;
+        transition: all 0.33s cubic-bezier(.666, 0, .4, 1.2);
+        transform: translate(0%, -50%);
+        animation: none;
+      }
+    }
+
+    .action-buttons {
+      height: 0rem;
+      position: absolute;
+      bottom: 1rem;
+      left: 6rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 2rem;
+      transition: all 0.33s cubic-bezier(.666, 0, .4, 1.2);
+
+      p {
+        font-size: 1.2rem;
+        color: #fff;
+        font-weight: 1000;
+        text-transform: uppercase;
+        transform: translateY(5rem);
+        transition: all 0.33s cubic-bezier(.666, 0, .4, 1.2);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .notch-hover {
+    &:hover {
+      width: 100%;
+
+      mat-icon {
+        left: 8%;
+      }
+
+      .content-main {
+        width: 20rem;
+
+        p {
+          animation: textAnimation 30s linear infinite;
+        }
+      }
+    }
+  }
+
+  .expanded-notch {
+    width: 100%;
+    min-width: 40rem;
+    height: 6rem;
+
+    mat-icon {
+      left: 8%;
+      width: 2.4rem;
+      height: 2.4rem;
+      font-size: 2.4rem;
+    }
+
+    .content-main {
+      width: 30rem;
+      margin-left: 6rem;
+      margin-top: -1rem;
+
+      p {
+        font-size: 1.4rem;
+        animation: textAnimation 30s linear infinite;
+      }
+    }
+
+    .action-buttons{
+      height: 2rem;
+
+      p{
+        transform: translateY(0rem);
+      }
+    }
+  }
+}
+
+@keyframes textAnimation {
+  0% {
+    transform: translate(0%, -50%);
+  }
+
+  100% {
+    transform: translate(-100%, -50%);
+  }
+}
+
+@keyframes notchContainerAnimation {
+  0%{
+    top: -5rem;
+  }
+  100%{
+    top: 2rem;
+  }
+}

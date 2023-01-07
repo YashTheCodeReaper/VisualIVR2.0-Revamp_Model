@@ -1,1 +1,204 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~material-icons/iconfont/material-icons.css';
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.main-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background: #ebecf0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .message-wrapper {
+    width: 500px;
+    height: auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    box-shadow: 10px 10px 10px rgba($color: #000000, $alpha: 0.01);
+  }
+}
+
+form {
+  width: 100%;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+
+  .grid3by4 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
+  }
+
+  .grid2by1 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+
+  .grid2by2 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  div {
+    button {
+      width: 100%;
+      height: 4rem;
+      outline: none;
+      border: none;
+      font-family: inherit;
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-top: 1rem;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .clear-button {
+      background: transparent;
+      border: 2px solid #e4e3e7;
+      border-radius: 10px;
+    }
+
+    .action-button {
+      background: #732B90;
+      border-radius: 10px;
+      color: #fff;
+    }
+  }
+}
+
+.input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  position: relative;
+
+  label {
+    font-size: 1.2rem;
+    color: #000;
+    font-weight: 500;
+  }
+
+  input {
+    width: 100%;
+    outline: none;
+    border: 2px solid #e4e3e7;
+    border-radius: 5px;
+    padding: 0.5rem 3.2rem;
+    font-size: 1.4rem;
+    font-family: inherit;
+    color: #000;
+    font-weight: 500;
+
+    &::placeholder {
+      font-family: inherit;
+      color: #d5d5d5;
+      font-weight: 400;
+      font-size: 1.2rem;
+    }
+  }
+
+  .error-block {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: #ca0000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.5rem;
+
+    p {
+      font-size: 1rem;
+      color: #fff;
+      font-weight: 500;
+    }
+  }
+
+  .hint-circle {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    position: absolute;
+    top: 3.1rem;
+    left: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      display: none;
+    }
+
+    .success-icon,
+    .warn-icon {
+      display: none;
+      width: 1.4rem;
+      height: 1.4rem;
+      font-size: 1.4rem;
+    }
+  }
+
+  .inprog-indicator {
+    svg {
+      display: block;
+      fill: #732B90;
+      width: 1.5rem;
+    }
+  }
+
+  .success-indicator {
+    background: rgb(13, 174, 13);
+
+    .success-icon {
+      display: block;
+      color: #fff;
+      margin-top: 0.1rem;
+    }
+  }
+
+  .warn-indicator {
+    background: red;
+
+    .warn-icon {
+      display: block;
+      color: #fff;
+      margin-top: 0.1rem;
+    }
+  }
+}
