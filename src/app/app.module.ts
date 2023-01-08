@@ -9,13 +9,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadComponentComponent } from './file-upload-component/file-upload-component.component';
 import { TetherfiNotilandComponent } from './tetherfi-notiland/tetherfi-notiland.component';
+import { RecordAudioComponentComponent } from './record-audio-component/record-audio-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreditCardComponentComponent,
     FileUploadComponentComponent,
-    TetherfiNotilandComponent
+    TetherfiNotilandComponent,
+    RecordAudioComponentComponent
   ],
   imports: [
     BrowserModule,

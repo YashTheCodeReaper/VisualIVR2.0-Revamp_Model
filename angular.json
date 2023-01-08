@@ -64,6 +64,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "sslKey": "./localhost-key.pem",
+            "sslCert": "./localhost.pem",
+            "ssl": true
+          },
           "configurations": {
             "production": {
               "browserTarget": "vivr2.0-revamp:build:production"
