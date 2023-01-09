@@ -5,34 +5,68 @@
       <h2>Please record and upload your audio saying the concent.</h2>
       <div class="audio-player">
         <div class="left-info">
-          <div class="rec-info-button">
+          <div class="rec-info-button" [ngClass]="{'rec-info-blink': isRecordActive}">
             <div class="rec-dot"></div>
             <p>REC</p>
           </div>
           <div class="rec-timer">
-            <p>00<span>H</span>:00<span>M</span>:00<span>S</span></p>
+            <p>{{currHour}}<span>H</span>:{{currMin}}<span>M</span>:{{currSecond}}<span>S</span></p>
             <p>WEBM <span></span> 128kbps</p>
           </div>
         </div>
         <div class="right-controls">
           <div class="file-info">
-            <p>Please press record button</p>
-            <p>0.00 mb</p>
+            <p>{{currFileName ? currFileName : 'Please press record button'}}</p>
+            <p>{{isRecordActive ? currSize : '0.00'}} mb</p>
           </div>
           <div class="visualizer">
 
           </div>
           <div class="control-bar">
-            <div class="action-button">
+            <div *ngIf="isRecordActive" class="record-stop-button" (click)="stopRecording()">
               <mat-icon>close</mat-icon>
             </div>
             <div class="record-stop-button" (click)="toggleRecording()">
-              <div class="record-toggler"></div>
-            </div>
-            <div class="action-button">
-              <mat-icon>done</mat-icon>
+              <div *ngIf="!isRecordActive" class="record-toggler"></div>
+              <mat-icon *ngIf="isRecordActive">done</mat-icon>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="divider" *ngIf="filesToUpload.length">
+        <div class="line"></div>
+      </div>
+      <div class="files-flex" *ngIf="filesToUpload.length">
+        <div class="file-box" *ngFor="let file of filesToUpload; let i = index">
+          <audio controls>
+            <source [src]="file.blobURL">
+          </audio>
+          <div class="file-icon-box">
+            <div class="file-icon">
+              <mat-icon>audiotrack</mat-icon>
+            </div>
+          </div>
+          <div class="file-info-progress-flex">
+            <p>{{file.title}}</p>
+            <p>{{file.size}} mb | {{file.duration}} seconds</p>
+          </div>
+          <div class="file-action-box">
+            <div class="file-action">
+              <mat-icon (click)="removeFile(i)">close</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider">
+        <div class="line"></div>
+      </div>
+      <div class="end-flex">
+        <div class="hint-box">
+          <mat-icon>info</mat-icon>
+        </div>
+        <div class="button-flex">
+          <button type="button" class="discard-button">Discard</button>
+          <button type="button" class="action-button">Upload</button>
         </div>
       </div>
     </div>

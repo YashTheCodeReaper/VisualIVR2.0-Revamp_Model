@@ -67,6 +67,10 @@
         }
       }
 
+      .rec-info-blink {
+        animation: blink linear infinite 1s;
+      }
+
       .rec-timer {
         position: absolute;
         bottom: 1rem;
@@ -116,7 +120,7 @@
       align-items: center;
       justify-content: center;
 
-      .file-info{
+      .file-info {
         position: absolute;
         width: 100%;
         top: 0.5rem;
@@ -126,19 +130,19 @@
         align-items: flex-start;
         justify-content: flex-start;
 
-        p{
+        p {
           font-size: 1.2rem;
           font-weight: 500;
           color: #fff;
 
-          &:nth-child(2){
+          &:nth-child(2) {
             font-size: 1rem;
             font-weight: 400;
           }
         }
       }
 
-      .visualizer{
+      .visualizer {
         width: 100%;
         display: flex;
         align-items: center;
@@ -155,24 +159,6 @@
         position: absolute;
         bottom: 0.5rem;
         left: 1rem;
-
-        .action-button{
-          width: 3rem;
-          height: 3rem;
-          border-radius: 50px;
-          background: #fff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-
-          mat-icon{
-            width: 1.4rem;
-            height: 1.4rem;
-            font-size: 1.4rem;
-            color: #6a26da;
-          }
-        }
 
         .record-stop-button {
           height: 100%;
@@ -203,5 +189,175 @@
         }
       }
     }
+  }
+
+  .files-flex {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+
+    .file-box {
+      width: 100%;
+      height: 5rem;
+      border: 2px solid #e4e3e7;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: space-between;
+
+      audio{
+        position: absolute;
+        opacity: 0;
+      }
+
+      .file-icon-box,
+      .file-action-box {
+        width: 5rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .file-icon,
+        .file-action {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 3rem;
+          height: 3rem;
+          border: 2px solid #e4e3e7;
+          border-radius: 5px;
+
+          mat-icon {
+            width: 2rem;
+            height: 2rem;
+            font-size: 2rem;
+            color: #6a26da;
+          }
+        }
+      }
+
+      .file-action-box {
+        .file-action {
+          border: none;
+
+          mat-icon {
+            color: #ca0000;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .file-info-progress-flex {
+        width: calc(100% - 10rem);
+        padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0.5rem;
+
+        p {
+          color: #000;
+          font-size: 1.2rem;
+          font-weight: 600;
+          width: auto;
+          max-width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+          &:nth-child(2) {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #949494;
+          }
+        }
+      }
+    }
+  }
+
+  .divider {
+    width: 100%;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    position: relative;
+
+    .line {
+      width: 100%;
+      background: #e4e3e7;
+      height: 1px;
+    }
+  }
+
+  .end-flex {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -1rem;
+
+    .hint-box {
+      mat-icon {
+        width: 2rem;
+        height: 2rem;
+        font-size: 2rem;
+        color: #bbbbbb;
+        cursor: pointer;
+      }
+    }
+
+    .button-flex {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+
+      button {
+        width: 10rem;
+        height: 4rem;
+        outline: none;
+        border: none;
+        font-family: inherit;
+        font-size: 1.2rem;
+        font-weight: 500;
+        border-radius: 5px;
+        border: 2px solid transparent;
+        cursor: pointer;
+      }
+
+      .discard-button {
+        background: #fff;
+        border: 2px solid #e4e3e7;
+      }
+
+      .action-button {
+        background: #6a26da;
+        color: #fff;
+        border: 2px solid #6a26da;
+      }
+    }
+  }
+}
+
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
