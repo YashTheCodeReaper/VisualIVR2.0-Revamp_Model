@@ -11,10 +11,9 @@ export class RecordAudioComponentComponent implements OnInit {
   peakHit: boolean = false;
   hitValue: number = 0;
 
-  constructor() {
-  }
+  constructor() {}
   ngOnInit(): void {
-    this.simulateVisualizer()
+    this.simulateVisualizer();
   }
 
   toggleRecording() {
@@ -23,8 +22,16 @@ export class RecordAudioComponentComponent implements OnInit {
 
   simulateVisualizer() {
     const audioCtx = new AudioContext();
-    const numberOfNodes = 16;
-    const data = new Uint8Array(numberOfNodes * 4);
+    const numberOfNodes: any = 32;
+    const data: any = new Uint8Array(numberOfNodes * 4);
+    const elVisualizer: any = document.querySelector('.visualizer');
+
+    const elNodes = Array.from({ length: numberOfNodes }, (n: any, i: any) => {
+      let node = document.createElement('div');
+      node.className = 'node';
+      elVisualizer.appendChild(node);
+      return node;
+    });
 
     const analyserNode = new AnalyserNode(audioCtx, {
       fftSize: Math.max(numberOfNodes * 4, 32),
@@ -35,17 +42,14 @@ export class RecordAudioComponentComponent implements OnInit {
 
     const updateVisualizer = () => {
       requestAnimationFrame(updateVisualizer);
-
       analyserNode.getByteFrequencyData(data);
-      if(data[0] > 120) this.peakHit = true;
-      else this.peakHit = false;
 
-      this.hitValue = 130 - data[0];
-      if(this.hitValue < 1) this.hitValue = 10;
+      elNodes.forEach((node: any, i: any) => {
+        node.style.setProperty('--level', this.isRecordActive ? (data[i] / 255) * (1 + i / numberOfNodes) : '0.0833');
+      });
     }
 
     function startStream() {
-
       return navigator.mediaDevices
         .getUserMedia({ audio: true, video: false })
         .then((stream) => audioCtx.createMediaStreamSource(stream))
@@ -55,7 +59,7 @@ export class RecordAudioComponentComponent implements OnInit {
         .then(updateVisualizer);
     }
 
-    document.querySelector('.button')?.addEventListener('click', () => {
+    document.querySelector('.record-stop-button')?.addEventListener('click', () => {
       audioCtx.resume();
       startStream();
     });

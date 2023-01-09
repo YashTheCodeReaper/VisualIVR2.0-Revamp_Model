@@ -202,3 +202,12 @@ form {
     }
   }
 }
+
+.node{
+  width: 0.5rem;
+  min-height: 0.5rem;
+  max-height: 4rem;
+  height: calc(var(--level) * 6rem); //Max 3rem
+  background: #fff;
+  border-radius: 50px;
+}

@@ -3,19 +3,35 @@
     <div class="record-audio-container">
       <h1>Record your audio</h1>
       <h2>Please record and upload your audio saying the concent.</h2>
-      <div class="record-stop-button record-active" style="--v: {{hitValue}}"
-        [ngClass]="{'record-active': isRecordActive, 'active-visualizer': isRecordActive && peakHit}">
-        <div class="visualizer"></div>
-        <div class="button" (click)="toggleRecording()">
-          <div class="text-box">
-            <p>
-              <span style="--q: 0">R</span>
-              <span style="--q: 1">E</span>
-              <span style="--q: 2">C</span>
-              <span style="--q: 3">O</span>
-              <span style="--q: 4">R</span>
-              <span style="--q: 5">D</span>
-            </p>
+      <div class="audio-player">
+        <div class="left-info">
+          <div class="rec-info-button">
+            <div class="rec-dot"></div>
+            <p>REC</p>
+          </div>
+          <div class="rec-timer">
+            <p>00<span>H</span>:00<span>M</span>:00<span>S</span></p>
+            <p>WEBM <span></span> 128kbps</p>
+          </div>
+        </div>
+        <div class="right-controls">
+          <div class="file-info">
+            <p>Please press record button</p>
+            <p>0.00 mb</p>
+          </div>
+          <div class="visualizer">
+
+          </div>
+          <div class="control-bar">
+            <div class="action-button">
+              <mat-icon>close</mat-icon>
+            </div>
+            <div class="record-stop-button" (click)="toggleRecording()">
+              <div class="record-toggler"></div>
+            </div>
+            <div class="action-button">
+              <mat-icon>done</mat-icon>
+            </div>
           </div>
         </div>
       </div>
