@@ -1,0 +1,13 @@
+<div class="captcha-wrapper">
+  <ng-container *ngIf="captchaConfig.captchaHeader.enable && captchaHeaderSourceContent">
+    <header class="captcha-header captcha-header-{{captchaConfig.captchaHeader.position}}"
+      [innerHTML]="captchaHeaderSourceContent | safe: 'html'">
+    </header>
+  </ng-container>
+  <ng-container
+    *ngIf="captchaConfig.captchaHeader.enable && !captchaHeaderSourceContent && checkForSecureProtocol('captchaHeader')">
+    <header class="captcha-header captcha-header-{{captchaConfig.captchaHeader.position}}">
+      <iframe [src]="captchaConfig.captchaHeader.pathToSource | safe: 'resourceUrl'"></iframe>
+    </header>
+  </ng-container>
+</div>

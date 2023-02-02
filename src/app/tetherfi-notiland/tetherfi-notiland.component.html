@@ -1,4 +1,4 @@
-<div class="notiland-notch-box" *ngIf="warnMessage && warnIcon">
+<div class="notiland-notch-box" *ngIf="warnMessage && warnIcon && !isCall">
   <div class="notch" [ngClass]="{'expanded-notch': isNotchClicked, 'notch-hover': !isNotchClicked}" (click)="onNotchClick()">
     <mat-icon>{{warnIcon}}</mat-icon>
     <div class="content-main">
@@ -7,6 +7,26 @@
     <div class="action-buttons">
       <p (click)="onAccept()">OK</p>
       <p (click)="onDecline()">CANCEL</p>
+    </div>
+  </div>
+</div>
+
+<div class="call-box" *ngIf="isCall">
+  <div class="call-icon-info">
+    <i class="Phone is-animating">
+      <mat-icon>call</mat-icon>
+    </i>
+    <div class="call-info">
+      <p>Incoming video call</p>
+      <h5>Yashwanthkumar Arivazhagan</h5>
+    </div>
+  </div>
+  <div class="call-actions">
+    <div class="action-button">
+      <mat-icon>done</mat-icon>
+    </div>
+    <div class="action-button">
+      <mat-icon>close</mat-icon>
     </div>
   </div>
 </div>

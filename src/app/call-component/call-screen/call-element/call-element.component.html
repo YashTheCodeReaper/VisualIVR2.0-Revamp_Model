@@ -1,0 +1,43 @@
+<div class="audio-wrapper" *ngIf="!isParticipant && !isMini">
+  <video loop autoplay class="video-{{videoId}}" controls [muted]="false" [src]="videoSource"></video>
+  <div class="audio-bubble audio-bubble-{{randomNumber}}" [ngClass]="{'audio-bubble-active': volHigh}">
+    <h1>{{callerName.split(' ').length > 1 ? callerName.split(' ')[0].split('')[0]+callerName.split(' ')[1].split('')[0]
+      : callerName.split('')[0]+callerName.split('')[1]}}</h1>
+    <h5>{{callerName}}</h5>
+    <div class="options">
+      <div class="options-box" *ngIf="showOptionsBox">
+        <div class="option"><p>Focus</p></div>
+        <div class="option"><p>Mute Mic</p></div>
+        <div class="option"><p>Hide Video</p></div>
+        <div class="option"><p>Control Brightness</p></div>
+      </div>
+      <mat-icon (click)="toggleOptions()">more_vert</mat-icon>
+    </div>
+  </div>
+</div>
+
+<div class="participant-box" *ngIf="isParticipant">
+  <video loop autoplay class="video-{{videoId}}" controls [muted]="false" [src]="videoSource"></video>
+  <div class="participant-info">
+    <div class="image-bubble image-bubble-{{randomNumber}}" [ngClass]="{'image-bubble-active': volHigh}">
+      <h1>{{callerName.split(' ').length > 1 ? callerName.split(' ')[0].split('')[0]+callerName.split('
+        ')[1].split('')[0]
+        : callerName.split('')[0]+callerName.split('')[1]}}</h1>
+    </div>
+    <p>{{callerName}}</p>
+  </div>
+  <div class="participant-actions">
+    <mat-icon>videocam_off</mat-icon>
+    <mat-icon>mic</mat-icon>
+    <mat-icon>more_horiz</mat-icon>
+  </div>
+</div>
+
+<div class="audio-wrapper mini-wrapper" *ngIf="isMini">
+  <video loop autoplay class="video-{{videoId}}" controls [muted]="false" [src]="videoSource"></video>
+  <div class="audio-bubble audio-bubble-{{randomNumber}}" [ngClass]="{'audio-bubble-active': volHigh}">
+    <h1>{{callerName.split(' ').length > 1 ? callerName.split(' ')[0].split('')[0]+callerName.split(' ')[1].split('')[0]
+      : callerName.split('')[0]+callerName.split('')[1]}}</h1>
+    <h4>{{callerName}}</h4>
+  </div>
+</div>

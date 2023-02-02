@@ -1,0 +1,153 @@
+.connecting-view-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #e4ebf5;
+  background: rgba($color: #000000, $alpha: 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  .call-view-box{
+    background: #e4ebf5;
+    border-radius: 20px;
+    width: 25rem;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    position: relative;
+    padding: 2rem;
+    gap: 0.5rem;
+
+    p{
+      font-size: 1rem;
+      font-weight: 500;
+      color: #6a26da;
+    }
+
+    h5{
+      font-size: 1.6rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    .circle {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: scale(1) translate(-50%, -50%);
+
+      .circle__logo_container {
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        z-index: 300;
+        background: #e4ebf5;
+        box-shadow: 3px 3px 6px #c8d0e7, -2px -2px 5px #fff;
+        position: relative;
+        overflow: hidden;
+
+        img {
+          width: 90%;
+          height: auto;
+          border-radius: 50%;
+        }
+      }
+
+      .circle__back-1,
+      .circle__back-2 {
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        filter: blur(1px);
+        z-index: 100;
+        box-shadow: 4px 4px 8px #c8d0e7, -4px -4px 8px #fff;
+      }
+
+      .circle__back-1 {
+        background: linear-gradient(to bottom right,
+            #c8d0e7 0%,
+            #fff 100%);
+        animation: waves 1s linear infinite;
+      }
+
+      .circle__back-2 {
+        animation: waves 1s linear 500ms infinite;
+      }
+    }
+
+    .button-flex{
+      position: absolute;
+      bottom: 2rem;
+      padding: 0 2rem;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      p{
+        font-size: 1.2rem;
+        color: #777;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+
+      .call-main{
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50px;
+        background: #6a26da;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        mat-icon{
+          font-size: 2rem;
+          width: 2rem;
+          height: 2rem;
+          color: #fff;
+        }
+      }
+
+      .reject{
+        background:#fd6a6a;
+      }
+    }
+  }
+}
+
+@keyframes waves {
+  0% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}

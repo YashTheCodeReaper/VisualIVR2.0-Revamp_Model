@@ -1,0 +1,26 @@
+<div class="audio-call-grid-wrapper onevone"
+  [ngClass]="{'onevone': sourceCount == 1, 'onevtwo': sourceCount == 2, 'onevthree': sourceCount == 3, 'onevfour': sourceCount == 4, 'onevfive': sourceCount == 5, 'onevsix': sourceCount == 6, 'onevmany': sourceCount > 6 && !commonService.openParticipants}">
+  <app-call-element [callerName]="'Yashwanth Kumar'" [videoSource]="'assets/sample-0.mp3'"
+    [videoId]="0"></app-call-element>
+  <app-call-element [callerName]="'Suraj'" [videoSource]="'assets/sample-1.mp3'" [videoId]="1"></app-call-element>
+  <app-call-element [callerName]="'Varsha B'" [videoSource]="'assets/sample-2.mp3'" [videoId]="2"></app-call-element>
+  <app-call-element [callerName]="'Chirag A'" [videoSource]="'assets/sample-3.mp3'" [videoId]="3"></app-call-element>
+  <app-call-element [callerName]="'Ronnie Coleman'" [videoSource]="'assets/sample-0.mp3'"
+    [videoId]="0"></app-call-element>
+  <app-call-element [callerName]="'Black Jesus'" [videoSource]="'assets/sample-1.mp3'"
+    [videoId]="100"></app-call-element>
+  <!-- <div class="additional-participants-flex" *ngIf="!commonService.openParticipants">
+    <app-call-element [isMini]="true" [callerName]="'Ronnie Coleman'" [videoSource]="'assets/sample-0.mp3'"
+      [videoId]="0"></app-call-element>
+    <app-call-element [isMini]="true" [callerName]="'Black Jesus'" [videoSource]="'assets/sample-1.mp3'"
+      [videoId]="100"></app-call-element>
+    <app-call-element [isMini]="true" [callerName]="'Johnathan Wick'" [videoSource]="'assets/sample-2.mp3'"
+      [videoId]="012"></app-call-element>
+    <div class="more-box">
+      <div class="more-circle">
+        <p>10</p>
+      </div>
+      <h4>Everyone</h4>
+    </div>
+  </div> -->
+</div>

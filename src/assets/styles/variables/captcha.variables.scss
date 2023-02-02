@@ -1,0 +1,11 @@
+@import '../themes/default.theme.scss';
+
+// Captcha header
+$captcha-header-height: 8rem;
+$captcha-header-background: transparent;
+$captcha-header-padding: 0 2rem;
+$captcha-header-border-bottom: 1px solid $dark-border-color-0;
+$captcha-header-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.02);
+
+// Captcha crousel
+$captcha-crousel-slider-duration: 2000ms;

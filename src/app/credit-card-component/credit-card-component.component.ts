@@ -1,3 +1,4 @@
+import { OcrService } from './../services/ocr.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -10,22 +11,12 @@ export class CreditCardComponentComponent implements OnInit {
   creditCardGroup!: FormGroup;
   creditCardType: string = 'MASTERCARD';
 
-  constructor() {
+  constructor(private ocrService: OcrService) {
     this.creditCardGroup = new FormGroup({
-      nameOnCard: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-      ]),
+      nameOnCard: new FormControl('', [Validators.required, Validators.minLength(5)]),
       cardNumber: new FormControl('', [Validators.required, Validators.minLength(19)]),
-      cardExpiry: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^(0[1-9]|1[0-2])/?([0-9]{2})$'),
-      ]),
-      cardCvv: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[0-9]*$'),
-        Validators.minLength(3)
-      ]),
+      cardExpiry: new FormControl('', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])/?([0-9]{2})$')]),
+      cardCvv: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(3)]),
     });
   }
 
@@ -77,10 +68,8 @@ export class CreditCardComponentComponent implements OnInit {
 
   validateControl(controlName: string) {
     return (
-      (this.creditCardGroup.controls[controlName].touched &&
-        this.creditCardGroup.controls[controlName].errors) ||
-      (!this.creditCardGroup.controls[controlName].pristine &&
-        this.creditCardGroup.controls[controlName].invalid)
+      (this.creditCardGroup.controls[controlName].touched && this.creditCardGroup.controls[controlName].errors) ||
+      (!this.creditCardGroup.controls[controlName].pristine && this.creditCardGroup.controls[controlName].invalid)
     );
   }
 
@@ -89,10 +78,7 @@ export class CreditCardComponentComponent implements OnInit {
   }
 
   showWarningIndicator(controlName: string) {
-    return (
-      this.creditCardGroup.controls[controlName].touched &&
-      this.creditCardGroup.controls[controlName].invalid
-    );
+    return this.creditCardGroup.controls[controlName].touched && this.creditCardGroup.controls[controlName].invalid;
   }
 
   onExpiryInput(event: any) {
@@ -127,14 +113,30 @@ export class CreditCardComponentComponent implements OnInit {
       );
   }
 
-  formatCreditCardNumber(event: any){
-    const regex = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g
-    const onlyNumbers = event.target.value.replace(/[^\d]/g, '')
+  formatCreditCardNumber(event: any) {
+    const regex = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g;
+    const onlyNumbers = event.target.value.replace(/[^\d]/g, '');
 
-    event.target.value =  onlyNumbers.replace(regex, (regex: any, $1: any, $2: any, $3: any, $4: any) =>
-      [$1, $2, $3, $4].filter(group => !!group).join(' ')
-    )
+    event.target.value = onlyNumbers.replace(regex, (regex: any, $1: any, $2: any, $3: any, $4: any) =>
+      [$1, $2, $3, $4].filter((group) => !!group).join(' ')
+    );
 
-    this.creditCardType = this.findCreditCardType(event.target.value.replaceAll(' ', ''))
+    this.creditCardType = this.findCreditCardType(event.target.value.replaceAll(' ', ''));
+  }
+
+  async onFileUpload(fileData: any) {
+    const res: any = await this.fileToBase64(fileData[0]);
+    this.ocrService.recognizeImage(res).subscribe((response: any) => {
+      console.log(response);
+    });
+  }
+
+  fileToBase64(file: any) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
   }
 }

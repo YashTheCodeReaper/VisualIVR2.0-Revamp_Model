@@ -1,0 +1,85 @@
+<div class="call-controls-wrapper" *ngIf="!enableFloaterControlBar">
+  <div class="rec-box">
+    <div class="rec-indicator">
+      <span></span>
+    </div>
+    <p>00:01:32</p>
+  </div>
+  <div class="controls-flex">
+    <div class="button-flex" (click)="toggleFloaterControlBar()">
+      <mat-icon>filter_none</mat-icon>
+      <p>Popout</p>
+    </div>
+    <div class="divider"></div>
+    <div class="button-flex active-flex">
+      <div class="info-bubble">+1</div>
+      <mat-icon>people</mat-icon>
+      <p>People</p>
+    </div>
+    <div class="button-flex">
+      <mat-icon>chat</mat-icon>
+      <p>Chat</p>
+    </div>
+    <div class="button-flex">
+      <mat-icon>more_horiz</mat-icon>
+      <p>More</p>
+    </div>
+    <div class="divider"></div>
+    <div class="button-flex">
+      <mat-icon>videocam_off</mat-icon>
+      <p>Camera</p>
+    </div>
+    <div class="button-flex">
+      <mat-icon>mic_off</mat-icon>
+      <p>Mic</p>
+    </div>
+    <div class="button-flex">
+      <mat-icon>screen_share</mat-icon>
+      <p>Share</p>
+    </div>
+    <button class="red-button">
+      <mat-icon>call_end</mat-icon>
+      Leave
+    </button>
+  </div>
+</div>
+
+<div class="call-control-floater-wrapper" *ngIf="enableFloaterControlBar" (mouseleave)="onControlFloaterMouseHover()"
+  (mouseenter)="onControlFloaterMouseHover()" [ngClass]="{'hide-control-bar': hideControlBar}">
+  <div class="duration-flex">
+    <div class="rec-box">
+      <div class="rec-indicator">
+        <span></span>
+      </div>
+      <p>00:01:32</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="button-flex active-flex" (click)="toggleFloaterControlBar()">
+    <mat-icon>filter_none</mat-icon>
+  </div>
+  <div class="divider"></div>
+  <div class="button-flex" [ngClass]="{'active-flex': commonService.openParticipants}" (click)="onParticipantsClick()">
+    <div class="info-bubble">10</div>
+    <mat-icon>people</mat-icon>
+  </div>
+  <div class="button-flex">
+    <mat-icon>chat</mat-icon>
+  </div>
+  <div class="button-flex">
+    <mat-icon>more_horiz</mat-icon>
+  </div>
+  <div class="divider"></div>
+  <div class="button-flex">
+    <mat-icon>videocam_off</mat-icon>
+  </div>
+  <div class="button-flex">
+    <mat-icon>mic_off</mat-icon>
+  </div>
+  <div class="button-flex">
+    <mat-icon>screen_share</mat-icon>
+  </div>
+  <div class="button-flex red">
+    <mat-icon>call_end</mat-icon>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+@import '../../assets/styles/variables/captcha.variables.scss';
+
+.captcha-wrapper {
+  width: 100vw;
+  height: auto;
+  // overflow: scroll;
+  position: relative;
+
+  .captcha-header{
+    width: 100%;
+    height: $captcha-header-height;
+    background: $captcha-header-background;
+    padding: $captcha-header-padding;
+    border-bottom: $captcha-header-border-bottom;
+    box-shadow: $captcha-header-shadow;
+
+    iframe{
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .captcha-header-normal{
+    position: relative;
+  }
+
+  .captcha-header-fixed{
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

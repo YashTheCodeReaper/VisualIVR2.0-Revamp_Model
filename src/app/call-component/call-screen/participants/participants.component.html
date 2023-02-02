@@ -1,0 +1,43 @@
+<div class="participants-wrapper">
+  <div class="title">
+    <h3>Participants</h3>
+    <mat-icon (click)="onParticipantsClose()">close</mat-icon>
+  </div>
+  <div class="search-container">
+    <div class="input-box">
+      <input placeholder="Search for participants" type="text">
+      <mat-icon>search</mat-icon>
+    </div>
+  </div>
+  <div class="participant-flex">
+    <div class="collapse-participants-control">
+      <p>
+        <mat-icon>arrow_drop_down</mat-icon>
+        In this meeting (10)
+      </p>
+      <button type="button">Mute all</button>
+    </div>
+    <div class="participant-array">
+      <app-call-element [isParticipant]="true" [callerName]="'Poornachandra M'" [videoSource]="'assets/sample-4.mp3'"
+        [videoId]="4"></app-call-element>
+      <app-call-element [isParticipant]="true" [callerName]="'Kavana K'" [videoSource]="'assets/sample-5.mp3'"
+        [videoId]="5"></app-call-element>
+      <app-call-element [isParticipant]="true" [callerName]="'Bharish Alva'" [videoSource]="'assets/sample-3.mp3'"
+        [videoId]="6"></app-call-element>
+      <app-call-element [isParticipant]="true" [callerName]="'Siraj M'" [videoSource]="'assets/sample-1.mp3'"
+        [videoId]="7"></app-call-element>
+      <app-call-element [isParticipant]="true" [callerName]="'Sam'" [videoSource]="'assets/sample-2.mp3'"
+        [videoId]="8"></app-call-element>
+      <app-call-element [isParticipant]="true" [callerName]="'Prakash Dsouza'" [videoSource]="'assets/sample-3.mp3'"
+        [videoId]="9"></app-call-element>
+      <app-call-element [isParticipant]="true" [callerName]="'Trishul Shetty'" [videoSource]="'assets/sample-4.mp3'"
+        [videoId]="10"></app-call-element>
+      <app-call-element [isParticipant]="true" [callerName]="'Abdulla Hassan'" [videoSource]="'assets/sample-5.mp3'"
+        [videoId]="11"></app-call-element>
+      <app-call-element [isParticipant]="true" [callerName]="'Bijnu Thomas'" [videoSource]="'assets/sample-3.mp3'"
+        [videoId]="12"></app-call-element>
+      <app-call-element [isParticipant]="true" [callerName]="'Praveen Suresh'" [videoSource]="'assets/sample-1.mp3'"
+        [videoId]="13"></app-call-element>
+    </div>
+  </div>
+</div>

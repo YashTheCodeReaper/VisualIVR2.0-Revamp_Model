@@ -9,6 +9,8 @@ export class TetherfiNotilandComponent implements OnInit, OnDestroy {
   isNotchClicked: boolean = false;
   @Input('warnMessage') warnMessage!: string;
   @Input('warnIcon') warnIcon!: string;
+  @Input('isCall') isCall!: boolean;
+  @Input('callerName') callerName!: string;
   @Output('result') result = new EventEmitter<boolean>()
 
   constructor() {}
