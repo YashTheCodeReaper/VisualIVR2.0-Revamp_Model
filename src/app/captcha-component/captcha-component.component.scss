@@ -177,6 +177,10 @@
       }
     }
 
+    .captcha-form-fulll-width{
+      width: 100%;
+    }
+
     .captcha-form-container-vp-bottom {
       flex-direction: column-reverse;
     }
@@ -242,24 +246,25 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: $captcha-form-separated-input-field-container-gap;
+        gap: $captcha-form-input-field-container-gap;
 
         input{
           border: $captcha-form-input-field-border;
           border-radius: 0.5rem;
           color: $captcha-form-input-field-color;
+          width: $captcha-form-input-field-width;
+          text-align: center;
+          font-size: $captcha-form-input-field-font-size;
+          font-family: inherit;
+          text-transform: uppercase;
+          font-weight: 600;
+          height: $captcha-form-input-field-height;
         }
       }
 
       .separated-input-container{
         input{
-          height: $captcha-form-separated-input-field-height;
           width: $captcha-form-separated-input-field-width;
-          text-align: center;
-          font-size: 2rem;
-          font-family: inherit;
-          text-transform: uppercase;
-          font-weight: 600;
         }
       }
 

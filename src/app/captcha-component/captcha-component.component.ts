@@ -64,7 +64,7 @@ export class CaptchaComponentComponent implements OnInit {
       },
       captchaResetButtonPosition: 'right',
       separatedInputs: {
-        enable: true,
+        enable: false,
         letterCount: 4
       },
       captchaFooter: {

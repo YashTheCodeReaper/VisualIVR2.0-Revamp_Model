@@ -47,9 +47,11 @@ $captcha-form-captcha-reset-color: $light-text-color-0;
 // Captcha input
 $captcha-form-input-field-border: 2px solid#e5e5e5;
 $captcha-form-input-field-color: $dark-text-color-0;
-$captcha-form-separated-input-field-container-gap: 1rem;
-$captcha-form-separated-input-field-height: 4rem;
+$captcha-form-input-field-container-gap: 1rem;
+$captcha-form-input-field-height: 4rem;
 $captcha-form-separated-input-field-width: 3rem;
+$captcha-form-input-field-width: 15rem;
+$captcha-form-input-field-font-size: 2rem;
 // Captcha submit button
 $captcha-form-submit-button-width: 20rem;
 $captcha-form-submit-button-height: 4rem;

@@ -42,7 +42,8 @@
         </div>
       </div>
     </ng-container>
-    <div class="captcha-form-container captcha-form-container-vp-{{captchaConfig.captchaLogo.verticalPosition}}">
+    <div class="captcha-form-container captcha-form-container-vp-{{captchaConfig.captchaLogo.verticalPosition}}"
+      [ngClass]="{'captcha-form-fulll-width': !captchaConfig.captchaCarousel.enable}">
       <div
         class="captcha-logo-image-container captcha-logo-image-container-hp-{{captchaConfig.captchaLogo.horizontalPosition}}"
         *ngIf="captchaConfig.captchaLogo.enable">
@@ -65,6 +66,9 @@
           <ng-container *ngIf="captchaConfig.separatedInputs.enable">
             <input maxlength="1" *ngFor="let item of [].constructor(captchaConfig.separatedInputs.letterCount)"
               type="text">
+          </ng-container>
+          <ng-container *ngIf="!captchaConfig.separatedInputs.enable">
+            <input [maxLength]="captchaConfig.separatedInputs.letterCount" type="text">
           </ng-container>
         </div>
         <button type="button">Submit</button>
