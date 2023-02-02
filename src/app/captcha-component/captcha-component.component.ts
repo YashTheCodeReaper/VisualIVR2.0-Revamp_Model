@@ -46,7 +46,6 @@ export class CaptchaComponentComponent implements OnInit {
         pagination: {
           enable: true,
           showIndex: true,
-          manualSlide: true,
           style: 'dot',
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
@@ -58,6 +57,15 @@ export class CaptchaComponentComponent implements OnInit {
         pathToSource: 'assets/images/captcha/changi.webp',
         horizontalPosition: 'center',
         verticalPosition: 'top',
+      },
+      captchaImage: {
+        enable: true,
+        pathToSource: 'assets/images/captcha/captcha-image.svg',
+      },
+      captchaResetButtonPosition: 'right',
+      separatedInputs: {
+        enable: true,
+        letterCount: 4
       },
       captchaFooter: {
         enable: true,
@@ -94,7 +102,7 @@ export class CaptchaComponentComponent implements OnInit {
   ngOnInit(): void {}
 
   initSlider() {
-    if (this.carouselContentArray.length) {
+    if (this.carouselContentArray.length && this.captchaConfig.captchaCarousel.autoSlide.enable) {
       this.sliderIntervalFunction = setInterval(() => {
         if (this.currentSliderIndex != this.maxSliderIndex - 1) this.currentSliderIndex++;
         else this.currentSliderIndex = 0;

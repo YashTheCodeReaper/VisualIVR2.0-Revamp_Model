@@ -12,7 +12,8 @@
     </header>
   </ng-container>
   <!-- Captcha body -->
-  <div class="captcha-body" [ngClass]="{'captcha-body-grid': captchaConfig.captchaCarousel.enable}">
+  <div class="captcha-body"
+    [ngClass]="{'captcha-body-flex': captchaConfig.captchaCarousel.enable, 'captcha-body-invert-landscape': captchaConfig.captchaCarousel.position.landscape == 'right', 'captcha-full-h': !captchaConfig.captchaHeader.enable, 'captcha-h-header-normal': captchaConfig.captchaHeader.enable}">
     <ng-container *ngIf="captchaConfig.captchaCarousel.enable">
       <div class="captcha-carousel-container" *ngIf="carouselContentArray.length">
         <ng-container *ngIf="captchaConfig.captchaCarousel.pagination.enable">
@@ -24,6 +25,9 @@
               <ng-container *ngSwitchCase="'dot'">
                 <div *ngFor="let dot of captchaConfig.captchaCarousel.carouselContentPathArray; let i = index"
                   class="dot" [ngClass]="{'active-dot': i === currentSliderIndex}"></div>
+              </ng-container>
+              <ng-container *ngIf="captchaConfig.captchaCarousel.pagination.showIndex">
+                <div class="slider-index">{{currentSliderIndex+1}}/{{maxSliderIndex}}</div>
               </ng-container>
             </div>
             <mat-icon (click)="onSwipe('left')"
@@ -38,5 +42,33 @@
         </div>
       </div>
     </ng-container>
+    <div class="captcha-form-container captcha-form-container-vp-{{captchaConfig.captchaLogo.verticalPosition}}">
+      <div
+        class="captcha-logo-image-container captcha-logo-image-container-hp-{{captchaConfig.captchaLogo.horizontalPosition}}"
+        *ngIf="captchaConfig.captchaLogo.enable">
+        <img [src]="captchaConfig.captchaLogo.pathToSource">
+      </div>
+      <div class="captcha-form">
+        <h2>Security Verification</h2>
+        <ng-container *ngIf="captchaConfig.captchaImage.enable">
+          <div class="captcha-image-container">
+            <img [src]="captchaConfig.captchaImage.pathToSource">
+          </div>
+        </ng-container>
+        <div class="captcha-box captcha-box-hp-{{captchaConfig.captchaResetButtonPosition}}">
+          <button class="captcha-reset">
+            <mat-icon>refresh</mat-icon>
+          </button>
+          <img src="assets/images/captcha/captcha.jpg" alt="">
+        </div>
+        <div class="input-container" [ngClass]="{'separated-input-container': captchaConfig.separatedInputs.enable}">
+          <ng-container *ngIf="captchaConfig.separatedInputs.enable">
+            <input maxlength="1" *ngFor="let item of [].constructor(captchaConfig.separatedInputs.letterCount)"
+              type="text">
+          </ng-container>
+        </div>
+        <button type="button">Submit</button>
+      </div>
+    </div>
   </div>
 </div>

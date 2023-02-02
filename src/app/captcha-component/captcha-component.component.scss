@@ -35,7 +35,10 @@
     overflow: hidden;
     height: auto;
     display: flex;
-    height: $captcha-body-height;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: $captcha-header-height;
     margin: $captcha-body-margin;
     padding: $captcha-body-padding;
 
@@ -96,6 +99,15 @@
           gap: $captcha-carousel-paginator-gap;
           padding: $captcha-carousel-paginator-height;
           background: $captcha-carousel-paginator-background;
+          position: relative;
+
+          .slider-index {
+            font-size: calc($captcha-carousel-paginator-height * 1.5);
+            position: absolute;
+            bottom: calc($captcha-carousel-paginator-height * -2.5);
+            font-weight: 700;
+            color: $captcha-carousel-paginator-index-color;
+          }
 
           .dot {
             height: $captcha-carousel-paginator-dot-size;
@@ -131,11 +143,167 @@
         bottom: $captcha-carousel-paginator-offset-y;
       }
     }
+
+    .captcha-form-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: $captcha-form-background;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: $captcha-form-padding;
+
+      .captcha-logo-image-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: $captcha-form-logo-container-height;
+
+        img {
+          height: 95%;
+        }
+      }
+
+      .captcha-logo-image-container-hp-left {
+        justify-content: flex-start;
+      }
+
+      .captcha-logo-image-container-hp-right {
+        justify-content: flex-end;
+      }
+    }
+
+    .captcha-form-container-vp-bottom {
+      flex-direction: column-reverse;
+    }
+
+    .captcha-form {
+      width: 100%;
+      height: calc(100% - $captcha-form-logo-container-height);
+      display: flex;
+      flex-direction: column;
+      gap: $captcha-form-component-gap;
+      align-items: center;
+      justify-content: center;
+
+      h2 {
+        font-size: $captcha-form-header-font-size;
+        font-weight: 1000;
+        color: $captcha-form-header-color;
+      }
+
+      .captcha-image-container {
+        height: $captcha-form-captcha-image-container-height;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        img {
+          height: 100%;
+          width: auto;
+        }
+      }
+
+      .captcha-box {
+        width: $captcha-form-captcha-box-width;
+        height: $captcha-form-captcha-box-height;
+        border-radius: 0.5rem;
+        border: $captcha-form-captcha-box-border;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $captcha-form-captcha-box-padding;
+
+        .captcha-reset {
+          height: 100%;
+          width: $captcha-form-captcha-box-height;
+          outline: none;
+          border: none;
+          background: $captcha-form-captcha-reset-button-color;
+          border-radius: 0.5rem;
+          cursor: pointer;
+          color: $captcha-form-captcha-reset-color;
+        }
+
+        img{
+          height: 100%;
+          width: auto;
+          margin-left: 2rem;
+        }
+      }
+
+      .input-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: $captcha-form-separated-input-field-container-gap;
+
+        input{
+          border: $captcha-form-input-field-border;
+          border-radius: 0.5rem;
+          color: $captcha-form-input-field-color;
+        }
+      }
+
+      .separated-input-container{
+        input{
+          height: $captcha-form-separated-input-field-height;
+          width: $captcha-form-separated-input-field-width;
+          text-align: center;
+          font-size: 2rem;
+          font-family: inherit;
+          text-transform: uppercase;
+          font-weight: 600;
+        }
+      }
+
+      button{
+        height: $captcha-form-submit-button-height;
+        width: $captcha-form-submit-button-width;
+        outline: none;
+        border: none;
+        background: $captcha-form-submit-button-background;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        color: $captcha-form-submit-button-color;
+        font-family: inherit;
+        font-size: $captcha-form-submit-button-font-size;
+        font-weight: 400;
+        letter-spacing: 0.2rem;
+      }
+
+      .captcha-box-hp-right{
+        flex-direction: row-reverse;
+      }
+    }
   }
 
-  .captcha-body-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+  .captcha-body-flex {
+    .captcha-carousel-container {
+      width: 50%;
+    }
+
+    .captcha-form-container {
+      width: 50%;
+    }
+  }
+
+  .captcha-body-invert-landscape {
+    flex-direction: row-reverse;
+  }
+
+  .captcha-full-h{
+    height: 100vh;
+  }
+
+  .captcha-h-header-normal{
+    height: calc(100vh - $captcha-header-height);
   }
 
   &::-webkit-scrollbar {

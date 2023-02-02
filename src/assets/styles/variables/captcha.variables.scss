@@ -8,7 +8,7 @@ $captcha-header-border-bottom: 1px solid $dark-border-color-0;
 $captcha-header-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.02);
 
 // Captcha body
-$captcha-body-height: 60rem;
+$captcha-body-height: 100vh;
 $captcha-body-margin: 0;
 $captcha-body-padding: 0;
 
@@ -16,14 +16,46 @@ $captcha-body-padding: 0;
 $captcha-carousel-background: transparent;
 $captcha-carousel-transition: all 600ms cubic-bezier(1,-0.01,.17,1);
 // Carousel paginator
-$captcha-carousel-paginator-offset-x: 2rem;
-$captcha-carousel-paginator-offset-y: 2rem;
+$captcha-carousel-paginator-offset-x: 3rem;
+$captcha-carousel-paginator-offset-y: 3rem;
 $captcha-carousel-paginator-background: rgba(0, 0, 0, 0.3);
-$captcha-carousel-paginator-height: 0.75rem;
-$captcha-carousel-paginator-gap: 0.75rem;
+$captcha-carousel-paginator-height: 1rem;
+$captcha-carousel-paginator-gap: 1rem;
 $captcha-carousel-paginator-dot-size: 1rem;
 $captcha-carousel-paginator-active-color: $main-theme;
 $captcha-carousel-paginator-inactive-color: rgba(0, 0, 0, 0.3);
+$captcha-carousel-paginator-index-color: $light-text-color-0;
+
+// Captcha form
+$captcha-form-background: transparent;
+$captcha-form-padding: 2rem;
+$captcha-form-component-gap: 2rem;
+// Captcha logo
+$captcha-form-logo-container-height: 20%;
+// Captcha Header
+$captcha-form-header-color: $dark-text-color-1;
+$captcha-form-header-font-size: 2.4rem;
+// Captcha Image
+$captcha-form-captcha-image-container-height: 35%;
+// Captcha Box
+$captcha-form-captcha-box-width: 20rem;
+$captcha-form-captcha-box-height: 5rem;
+$captcha-form-captcha-box-border: 1px solid#e5e5e5;
+$captcha-form-captcha-box-padding: 0.5rem;
+$captcha-form-captcha-reset-button-color: $main-theme;
+$captcha-form-captcha-reset-color: $light-text-color-0;
+// Captcha input
+$captcha-form-input-field-border: 2px solid#e5e5e5;
+$captcha-form-input-field-color: $dark-text-color-0;
+$captcha-form-separated-input-field-container-gap: 1rem;
+$captcha-form-separated-input-field-height: 4rem;
+$captcha-form-separated-input-field-width: 3rem;
+// Captcha submit button
+$captcha-form-submit-button-width: 20rem;
+$captcha-form-submit-button-height: 4rem;
+$captcha-form-submit-button-background: $main-theme;
+$captcha-form-submit-button-color: $light-text-color-0;
+$captcha-form-submit-button-font-size: 1.2rem;
 
 // Captcha carousel
 $captcha-carousel-slider-duration: 2000ms;

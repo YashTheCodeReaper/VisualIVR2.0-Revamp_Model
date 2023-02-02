@@ -7,7 +7,7 @@ export interface Captcha {
     position: string; // `normal` || `sticky`
     pathToSource: string;
   };
-  captchaaCrousel: {
+  captchaCarousel: {
     enable: boolean;
     autoSlide: {
       enable: boolean;
@@ -32,7 +32,16 @@ export interface Captcha {
     enable: boolean;
     pathToSource: string;
     horizontalPosition: string; // `left` || `center` || `right`
-    verticalPosition: string; // `top` || `center` || `bottom`
+    verticalPosition: string; // `top` || `bottom`
+  };
+  captchaImage: {
+    enable: boolean;
+    pathToSource: string;
+  };
+  captchaResetButtonPosition: string; // `left` || `right`
+  separatedInputs: {
+    enable: boolean;
+    letterCount: number;
   };
   captchaFooter: {
     enable: boolean;
