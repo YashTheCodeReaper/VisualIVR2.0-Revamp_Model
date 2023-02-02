@@ -7,5 +7,23 @@ $captcha-header-padding: 0 2rem;
 $captcha-header-border-bottom: 1px solid $dark-border-color-0;
 $captcha-header-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.02);
 
-// Captcha crousel
-$captcha-crousel-slider-duration: 2000ms;
+// Captcha body
+$captcha-body-height: 60rem;
+$captcha-body-margin: 0;
+$captcha-body-padding: 0;
+
+// Captcha carousel
+$captcha-carousel-background: transparent;
+$captcha-carousel-transition: all 600ms cubic-bezier(1,-0.01,.17,1);
+// Carousel paginator
+$captcha-carousel-paginator-offset-x: 2rem;
+$captcha-carousel-paginator-offset-y: 2rem;
+$captcha-carousel-paginator-background: rgba(0, 0, 0, 0.3);
+$captcha-carousel-paginator-height: 0.75rem;
+$captcha-carousel-paginator-gap: 0.75rem;
+$captcha-carousel-paginator-dot-size: 1rem;
+$captcha-carousel-paginator-active-color: $main-theme;
+$captcha-carousel-paginator-inactive-color: rgba(0, 0, 0, 0.3);
+
+// Captcha carousel
+$captcha-carousel-slider-duration: 2000ms;

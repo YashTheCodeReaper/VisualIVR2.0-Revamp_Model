@@ -1,0 +1,3 @@
+{
+  "carouselContent": "<style>.carousel-content{width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}.some-text{position:absolute;top:5rem;left:2rem;width:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;z-index:1;}h4{font-size:3rem;font-weight:1000;color:black;text-transform:uppercase;opacity:0.6;margin-top:-2rem;}.carousel-image{width:100%;height:auto;filter:grayscale(100%);}</style><div class='carousel-content'><div class='some-text'><h4>Place your</h4><h4>Carousel content</h4><h4>Inside assets html folder</h4></div><img class='carousel-image' src='assets/images/captcha/captcha-carousel-image-1.jpg' alt=''></div>"
+}

@@ -6,7 +6,7 @@
   // overflow: scroll;
   position: relative;
 
-  .captcha-header{
+  .captcha-header {
     width: 100%;
     height: $captcha-header-height;
     background: $captcha-header-background;
@@ -14,20 +14,128 @@
     border-bottom: $captcha-header-border-bottom;
     box-shadow: $captcha-header-shadow;
 
-    iframe{
+    iframe {
       width: 100%;
       height: 100%;
     }
   }
 
-  .captcha-header-normal{
+  .captcha-header-normal {
     position: relative;
   }
 
-  .captcha-header-fixed{
+  .captcha-header-fixed {
     position: fixed;
     top: 0;
     left: 0;
+  }
+
+  .captcha-body {
+    width: 100%;
+    overflow: hidden;
+    height: auto;
+    display: flex;
+    height: $captcha-body-height;
+    margin: $captcha-body-margin;
+    padding: $captcha-body-padding;
+
+    .captcha-carousel-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: $captcha-carousel-background;
+      position: relative;
+
+      .carousel-slider-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        overflow: hidden;
+
+        .carousel-slider-container {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          width: 100%;
+          height: 100%;
+          transition: $captcha-carousel-transition;
+
+          .carousel-container {
+            min-width: 100%;
+            max-width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+          }
+        }
+      }
+
+      .carousel-paginator-container {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        z-index: 2;
+        gap: $captcha-carousel-paginator-gap;
+
+        mat-icon {
+          height: calc($captcha-carousel-paginator-dot-size * 2);
+          width: auto;
+          font-size: calc($captcha-carousel-paginator-dot-size * 2);
+          cursor: pointer;
+        }
+
+        .paginator-flex {
+          display: inline-flex;
+          border-radius: 5rem;
+          align-items: center;
+          justify-content: center;
+          height: $captcha-carousel-paginator-height;
+          gap: $captcha-carousel-paginator-gap;
+          padding: $captcha-carousel-paginator-height;
+          background: $captcha-carousel-paginator-background;
+
+          .dot {
+            height: $captcha-carousel-paginator-dot-size;
+            width: $captcha-carousel-paginator-dot-size;
+            border-radius: 5rem;
+            background: $captcha-carousel-paginator-inactive-color;
+          }
+
+          .active-dot {
+            background: $captcha-carousel-paginator-active-color;
+          }
+        }
+      }
+
+      .carousel-paginator-container-hp-left {
+        left: $captcha-carousel-paginator-offset-x;
+      }
+
+      .carousel-paginator-container-hp-right {
+        right: $captcha-carousel-paginator-offset-x;
+      }
+
+      .carousel-paginator-container-hp-center {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .carousel-paginator-container-hp-top {
+        top: $captcha-carousel-paginator-offset-y;
+      }
+
+      .carousel-paginator-container-hp-bottom {
+        bottom: $captcha-carousel-paginator-offset-y;
+      }
+    }
+  }
+
+  .captcha-body-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   &::-webkit-scrollbar {

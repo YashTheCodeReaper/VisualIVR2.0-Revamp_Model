@@ -4,22 +4,35 @@ export interface Captcha {
   allowOnlySecureProtocolForSources: boolean;
   captchaHeader: {
     enable: boolean;
-    position: string; // `Normal` || `Sticky`
+    position: string; // `normal` || `sticky`
     pathToSource: string;
   };
-  captchaCrousel: {
+  captchaaCrousel: {
     enable: boolean;
+    autoSlide: {
+      enable: boolean;
+      delay: number; // In milliseconds
+    };
+    manualSlide: boolean;
     position: {
-      landscape: string, // `Left` || `Right`
-      portrait: string // `Top` || `Bottom`
+      landscape: string; // `left` || `right`
+      portrait: string; // `top` || `bottom`
+    };
+    carouselContentPathArray: string[]; // Array of paths
+    pagination: {
+      enable: boolean;
+      showIndex: boolean;
+      style: 'dot'; // `dot` || `dash` ||
+      horizontalPosition: string; // `left` || `center` || `right`
+      verticalPosition: string; // `top` || `bottom`
     };
   };
-  formPosition: string; // `Left` || `Center` || `Right`
+  formPosition: string; // `left` || `center` || `right`
   captchaLogo: {
     enable: boolean;
     pathToSource: string;
-    horizontalPosition: string; // `Left` || `Center` || `Right`
-    verticalPosition: string; // `Top` || `Center` || `Bottom`
+    horizontalPosition: string; // `left` || `center` || `right`
+    verticalPosition: string; // `top` || `center` || `bottom`
   };
   captchaFooter: {
     enable: boolean;

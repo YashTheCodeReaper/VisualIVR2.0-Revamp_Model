@@ -1,4 +1,5 @@
 <div class="captcha-wrapper">
+  <!-- Captcha header -->
   <ng-container *ngIf="captchaConfig.captchaHeader.enable && captchaHeaderSourceContent">
     <header class="captcha-header captcha-header-{{captchaConfig.captchaHeader.position}}"
       [innerHTML]="captchaHeaderSourceContent | safe: 'html'">
@@ -10,4 +11,32 @@
       <iframe [src]="captchaConfig.captchaHeader.pathToSource | safe: 'resourceUrl'"></iframe>
     </header>
   </ng-container>
+  <!-- Captcha body -->
+  <div class="captcha-body" [ngClass]="{'captcha-body-grid': captchaConfig.captchaCarousel.enable}">
+    <ng-container *ngIf="captchaConfig.captchaCarousel.enable">
+      <div class="captcha-carousel-container" *ngIf="carouselContentArray.length">
+        <ng-container *ngIf="captchaConfig.captchaCarousel.pagination.enable">
+          <div
+            class="carousel-paginator-container carousel-paginator-container-hp-{{captchaConfig.captchaCarousel.pagination.horizontalPosition}} carousel-paginator-container-hp-{{captchaConfig.captchaCarousel.pagination.verticalPosition}}">
+            <mat-icon (click)="onSwipe('right')"
+              *ngIf="captchaConfig.captchaCarousel.manualSlide">keyboard_arrow_left</mat-icon>
+            <div class="paginator-flex" [ngSwitch]="captchaConfig.captchaCarousel.pagination.style">
+              <ng-container *ngSwitchCase="'dot'">
+                <div *ngFor="let dot of captchaConfig.captchaCarousel.carouselContentPathArray; let i = index"
+                  class="dot" [ngClass]="{'active-dot': i === currentSliderIndex}"></div>
+              </ng-container>
+            </div>
+            <mat-icon (click)="onSwipe('left')"
+              *ngIf="captchaConfig.captchaCarousel.manualSlide">keyboard_arrow_right</mat-icon>
+          </div>
+        </ng-container>
+        <div class="carousel-slider-wrapper">
+          <div class="carousel-slider-container" #carouselSliderContainer>
+            <div *ngFor="let carouselContent of carouselContentArray" class="carousel-container"
+              [innerHTML]="carouselContent.carouselContent | safe: 'html'"></div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>
