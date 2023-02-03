@@ -61,3 +61,10 @@ $captcha-form-submit-button-font-size: 1.2rem;
 
 // Captcha carousel
 $captcha-carousel-slider-duration: 2000ms;
+
+// Captcha footer
+$captcha-footer-height: 8rem;
+$captcha-footer-background: transparent;
+$captcha-footer-padding: 0;
+$captcha-footer-border-top: 0px solid $dark-border-color-0;
+$captcha-footer-shadow: 0 -0.5rem 1rem rgba(0, 0, 0, 0.02);

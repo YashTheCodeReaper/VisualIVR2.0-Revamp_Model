@@ -14,6 +14,7 @@ export class CaptchaComponentComponent implements OnInit {
   applicationConfig: any;
   captchaConfig!: Captcha | any;
   captchaHeaderSourceContent!: string;
+  captchaFooterSourceContent!: string;
   carouselContentArray: any = [];
   currentSliderIndex: number = 0;
   maxSliderIndex: number = 0;
@@ -21,7 +22,7 @@ export class CaptchaComponentComponent implements OnInit {
 
   constructor(private http: HttpClient, private renderer: Renderer2) {
     this.captchaConfig = {
-      allowOnlySecureProtocolForSources: false,
+      allowOnlySecureProtocolForSources: true,
       captchaHeader: {
         enable: true,
         position: 'normal',
@@ -35,8 +36,8 @@ export class CaptchaComponentComponent implements OnInit {
         },
         manualSlide: true,
         position: {
-          landscape: 'left',
-          portrait: 'top',
+          landscape: 'right',
+          portrait: 'top', // todo
         },
         carouselContentPathArray: [
           'assets/html/captcha/captcha-crousel-content-1.json',
@@ -45,13 +46,12 @@ export class CaptchaComponentComponent implements OnInit {
         ],
         pagination: {
           enable: true,
-          showIndex: true,
+          showIndex: false,
           style: 'dot',
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
         },
       },
-      formPosition: 'center',
       captchaLogo: {
         enable: true,
         pathToSource: 'assets/images/captcha/changi.webp',
@@ -64,12 +64,12 @@ export class CaptchaComponentComponent implements OnInit {
       },
       captchaResetButtonPosition: 'right',
       separatedInputs: {
-        enable: false,
-        letterCount: 4
+        enable: true,
+        letterCount: 4,
       },
       captchaFooter: {
         enable: true,
-        pathToSource: 'assets/html/captcha/captcha-footer.html',
+        pathToSource: 'assets/html/captcha/captcha-footer.json',
       },
     };
 
@@ -79,6 +79,15 @@ export class CaptchaComponentComponent implements OnInit {
     ) {
       this.http.get(this.captchaConfig.captchaHeader.pathToSource).subscribe((content: any) => {
         this.captchaHeaderSourceContent = content.captchaHeaderContent;
+      });
+    }
+
+    if (
+      this.captchaConfig.captchaFooter.enable &&
+      !this.captchaConfig.captchaFooter.pathToSource.includes('http')
+    ) {
+      this.http.get(this.captchaConfig.captchaFooter.pathToSource).subscribe((content: any) => {
+        this.captchaFooterSourceContent = content.captchaFooterContent;
       });
     }
 

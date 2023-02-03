@@ -2,8 +2,8 @@
 
 .captcha-wrapper {
   width: 100vw;
-  height: auto;
-  // overflow: scroll;
+  height: 100vh;
+  overflow: scroll;
   position: relative;
 
   .captcha-header {
@@ -28,6 +28,20 @@
     position: fixed;
     top: 0;
     left: 0;
+  }
+
+  .captcha-footer {
+    width: 100%;
+    height: $captcha-footer-height;
+    background: $captcha-footer-background;
+    padding: $captcha-footer-padding;
+    border-top: $captcha-footer-border-top;
+    box-shadow: $captcha-footer-shadow;
+
+    iframe{
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .captcha-body {
@@ -177,7 +191,7 @@
       }
     }
 
-    .captcha-form-fulll-width{
+    .captcha-form-fulll-width {
       width: 100%;
     }
 
@@ -235,20 +249,20 @@
           color: $captcha-form-captcha-reset-color;
         }
 
-        img{
+        img {
           height: 100%;
           width: auto;
           margin-left: 2rem;
         }
       }
 
-      .input-container{
+      .input-container {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: $captcha-form-input-field-container-gap;
 
-        input{
+        input {
           border: $captcha-form-input-field-border;
           border-radius: 0.5rem;
           color: $captcha-form-input-field-color;
@@ -262,13 +276,13 @@
         }
       }
 
-      .separated-input-container{
-        input{
+      .separated-input-container {
+        input {
           width: $captcha-form-separated-input-field-width;
         }
       }
 
-      button{
+      button {
         height: $captcha-form-submit-button-height;
         width: $captcha-form-submit-button-width;
         outline: none;
@@ -283,9 +297,13 @@
         letter-spacing: 0.2rem;
       }
 
-      .captcha-box-hp-right{
+      .captcha-box-hp-right {
         flex-direction: row-reverse;
       }
+    }
+
+    .captcha-form-full-h {
+      height: 100%;
     }
   }
 
@@ -303,11 +321,11 @@
     flex-direction: row-reverse;
   }
 
-  .captcha-full-h{
+  .captcha-full-h {
     height: 100vh;
   }
 
-  .captcha-h-header-normal{
+  .captcha-h-header-normal {
     height: calc(100vh - $captcha-header-height);
   }
 

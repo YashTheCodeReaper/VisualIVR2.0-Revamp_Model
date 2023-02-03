@@ -27,7 +27,6 @@ export interface Captcha {
       verticalPosition: string; // `top` || `bottom`
     };
   };
-  formPosition: string; // `left` || `center` || `right`
   captchaLogo: {
     enable: boolean;
     pathToSource: string;

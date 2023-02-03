@@ -49,7 +49,7 @@
         *ngIf="captchaConfig.captchaLogo.enable">
         <img [src]="captchaConfig.captchaLogo.pathToSource">
       </div>
-      <div class="captcha-form">
+      <div class="captcha-form" [ngClass]="{'captcha-form-full-h': !captchaConfig.captchaLogo.enable}">
         <h2>Security Verification</h2>
         <ng-container *ngIf="captchaConfig.captchaImage.enable">
           <div class="captcha-image-container">
@@ -75,4 +75,15 @@
       </div>
     </div>
   </div>
+  <!-- Captcha footer -->
+  <ng-container *ngIf="captchaConfig.captchaFooter.enable && captchaFooterSourceContent">
+    <footer class="captcha-footer" [innerHTML]="captchaFooterSourceContent | safe: 'html'">
+    </footer>
+  </ng-container>
+  <ng-container
+    *ngIf="captchaConfig.captchaFooter.enable && !captchaFooterSourceContent && checkForSecureProtocol('captchaFooter')">
+    <footer class="captcha-footer">
+      <iframe [src]="captchaConfig.captchaFooter.pathToSource | safe: 'resourceUrl'"></iframe>
+    </footer>
+  </ng-container>
 </div>
