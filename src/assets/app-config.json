@@ -1,0 +1,53 @@
+{
+  "captchaConfig": {
+    "allowOnlySecureProtocolForSources": true,
+    "captchaHeader": {
+      "enable": true,
+      "position": "normal",
+      "pathToSource": "assets/html/captcha/captcha-header.json"
+    },
+    "captchaCarousel": {
+      "enable": true,
+      "autoSlide": {
+        "enable": true,
+        "delay": 4000
+      },
+      "manualSlide": true,
+      "position": {
+        "landscape": "right",
+        "portrait": "top"
+      },
+      "carouselContentPathArray": [
+        "assets/html/captcha/captcha-crousel-content-1.json",
+        "assets/html/captcha/captcha-crousel-content-2.json",
+        "assets/html/captcha/captcha-crousel-content-3.json"
+      ],
+      "pagination": {
+        "enable": true,
+        "showIndex": false,
+        "style": "dot",
+        "horizontalPosition": "center",
+        "verticalPosition": "bottom"
+      }
+    },
+    "captchaLogo": {
+      "enable": true,
+      "pathToSource": "assets/images/captcha/changi.webp",
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
+    },
+    "captchaImage": {
+      "enable": true,
+      "pathToSource": "assets/images/captcha/captcha-image.svg"
+    },
+    "captchaResetButtonPosition": "right",
+    "separatedInputs": {
+      "enable": true,
+      "letterCount": 4
+    },
+    "captchaFooter": {
+      "enable": true,
+      "pathToSource": "assets/html/captcha/captcha-footer.json"
+    }
+  }
+}

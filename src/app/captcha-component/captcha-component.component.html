@@ -1,4 +1,4 @@
-<div class="captcha-wrapper">
+<div class="captcha-wrapper" [ngClass]="{'captcha-wrapper-p-t': captchaConfig.captchaHeader.enable && captchaConfig.captchaHeader.position == 'sticky'}" *ngIf="captchaConfig">
   <!-- Captcha header -->
   <ng-container *ngIf="captchaConfig.captchaHeader.enable && captchaHeaderSourceContent">
     <header class="captcha-header captcha-header-{{captchaConfig.captchaHeader.position}}"
@@ -13,7 +13,7 @@
   </ng-container>
   <!-- Captcha body -->
   <div class="captcha-body"
-    [ngClass]="{'captcha-body-flex': captchaConfig.captchaCarousel.enable, 'captcha-body-invert-landscape': captchaConfig.captchaCarousel.position.landscape == 'right', 'captcha-full-h': !captchaConfig.captchaHeader.enable, 'captcha-h-header-normal': captchaConfig.captchaHeader.enable}">
+    [ngClass]="{'captcha-body-flex': captchaConfig.captchaCarousel.enable, 'captcha-body-invert-landscape': captchaConfig.captchaCarousel.position.landscape == 'right', 'captcha-body-invert-portrait':  captchaConfig.captchaCarousel.position.portrait == 'bottom', 'captcha-full-h': !captchaConfig.captchaHeader.enable, 'captcha-h-header-normal': captchaConfig.captchaHeader.enable}">
     <ng-container *ngIf="captchaConfig.captchaCarousel.enable">
       <div class="captcha-carousel-container" *ngIf="carouselContentArray.length">
         <ng-container *ngIf="captchaConfig.captchaCarousel.pagination.enable">

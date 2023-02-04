@@ -26,7 +26,7 @@
     height: 20rem;
     background: #fdfcff;
     border: 2px dashed #6a26da;
-    border-radius: 10px;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,9 +54,9 @@
         gap: 1rem;
 
         .slider-dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 50px;
+          width: 1rem;
+          height: 1rem;
+          border-radius: 5rem;
           background: #fff;
           border: 1px solid #e5e5e5;
           box-shadow: 2px 2px 2px rgba($color: #000000, $alpha: 0.05);
@@ -116,8 +116,8 @@
 
               .bar1 {
                 width: 50%;
-                height: 7px;
-                border-radius: 50px;
+                height: 0.7rem;
+                border-radius: 5rem;
                 background: #f7f6fc;
               }
 

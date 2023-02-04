@@ -12,7 +12,7 @@ declare var document: any;
 export class CaptchaComponentComponent implements OnInit {
   @ViewChild('carouselSliderContainer') carouselSliderContainer!: ElementRef;
   applicationConfig: any;
-  captchaConfig!: Captcha | any;
+  captchaConfig: Captcha | any = undefined;
   captchaHeaderSourceContent!: string;
   captchaFooterSourceContent!: string;
   carouselContentArray: any = [];
@@ -21,91 +21,43 @@ export class CaptchaComponentComponent implements OnInit {
   sliderIntervalFunction: any;
 
   constructor(private http: HttpClient, private renderer: Renderer2) {
-    this.captchaConfig = {
-      allowOnlySecureProtocolForSources: true,
-      captchaHeader: {
-        enable: true,
-        position: 'normal',
-        pathToSource: 'assets/html/captcha/captcha-header.json',
-      },
-      captchaCarousel: {
-        enable: true,
-        autoSlide: {
-          enable: true,
-          delay: 4000,
-        },
-        manualSlide: true,
-        position: {
-          landscape: 'right',
-          portrait: 'top', // todo
-        },
-        carouselContentPathArray: [
-          'assets/html/captcha/captcha-crousel-content-1.json',
-          'assets/html/captcha/captcha-crousel-content-2.json',
-          'assets/html/captcha/captcha-crousel-content-3.json',
-        ],
-        pagination: {
-          enable: true,
-          showIndex: false,
-          style: 'dot',
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-        },
-      },
-      captchaLogo: {
-        enable: true,
-        pathToSource: 'assets/images/captcha/changi.webp',
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-      },
-      captchaImage: {
-        enable: true,
-        pathToSource: 'assets/images/captcha/captcha-image.svg',
-      },
-      captchaResetButtonPosition: 'right',
-      separatedInputs: {
-        enable: true,
-        letterCount: 4,
-      },
-      captchaFooter: {
-        enable: true,
-        pathToSource: 'assets/html/captcha/captcha-footer.json',
-      },
-    };
+    this.http.get('assets/app-config.json').subscribe((configData: Captcha | any) => {
+      this.captchaConfig = configData.captchaConfig;
 
-    if (
-      this.captchaConfig.captchaHeader.enable &&
-      !this.captchaConfig.captchaHeader.pathToSource.includes('http')
-    ) {
-      this.http.get(this.captchaConfig.captchaHeader.pathToSource).subscribe((content: any) => {
-        this.captchaHeaderSourceContent = content.captchaHeaderContent;
-      });
-    }
+      if (
+        this.captchaConfig.captchaHeader.enable &&
+        !this.captchaConfig.captchaHeader.pathToSource.includes('http')
+      ) {
+        this.http.get(this.captchaConfig.captchaHeader.pathToSource).subscribe((content: any) => {
+          this.captchaHeaderSourceContent = content.captchaHeaderContent;
+        });
+      }
 
-    if (
-      this.captchaConfig.captchaFooter.enable &&
-      !this.captchaConfig.captchaFooter.pathToSource.includes('http')
-    ) {
-      this.http.get(this.captchaConfig.captchaFooter.pathToSource).subscribe((content: any) => {
-        this.captchaFooterSourceContent = content.captchaFooterContent;
-      });
-    }
+      if (
+        this.captchaConfig.captchaFooter.enable &&
+        !this.captchaConfig.captchaFooter.pathToSource.includes('http')
+      ) {
+        this.http.get(this.captchaConfig.captchaFooter.pathToSource).subscribe((content: any) => {
+          this.captchaFooterSourceContent = content.captchaFooterContent;
+        });
+      }
 
-    if (
-      this.captchaConfig.captchaCarousel.enable &&
-      this.captchaConfig.captchaCarousel.carouselContentPathArray.length
-    ) {
-      this.captchaConfig.captchaCarousel.carouselContentPathArray.forEach(
-        (content: any, index: number) => {
-          this.http.get(content).subscribe((carouselContent: any) => {
-            this.carouselContentArray.push(carouselContent);
-            this.maxSliderIndex = this.carouselContentArray.length;
-            if (index == this.captchaConfig.captchaCarousel.carouselContentPathArray.length - 1)
-              this.initSlider();
-          });
-        }
-      );
-    }
+      if (
+        this.captchaConfig.captchaCarousel.enable &&
+        this.captchaConfig.captchaCarousel.carouselContentPathArray.length
+      ) {
+        this.captchaConfig.captchaCarousel.carouselContentPathArray.forEach(
+          (content: any, index: number) => {
+            this.http.get(content).subscribe((carouselContent: any) => {
+              this.carouselContentArray.push(carouselContent);
+              this.maxSliderIndex = this.carouselContentArray.length;
+              if (index == this.captchaConfig.captchaCarousel.carouselContentPathArray.length - 1)
+                this.initSlider();
+            });
+          }
+        );
+      }
+    });
   }
 
   ngOnInit(): void {}

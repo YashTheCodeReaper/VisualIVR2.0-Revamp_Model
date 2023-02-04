@@ -13,9 +13,6 @@ import { RecordAudioComponentComponent } from './record-audio-component/record-a
 import { CallComponentComponent } from './call-component/call-component.component';
 import { ConnectingViewComponent } from './call-component/connecting-view/connecting-view.component';
 import { ChatContainerComponent } from './chat-container/chat-container.component';
-import { HeaderComponent } from './chat-container/header/header.component';
-import { MessageBodyComponent } from './chat-container/message-body/message-body.component';
-import { ChatMessageComponent } from './chat-container/message-body/chat-message/chat-message.component';
 import { CallScreenComponent } from './call-component/call-screen/call-screen.component';
 import { CallControlsComponent } from './call-component/call-screen/call-controls/call-controls.component';
 import { AudioCallGridComponent } from './call-component/call-screen/audio-call-grid/audio-call-grid.component';
@@ -35,9 +32,6 @@ import { SafePipeModule } from 'safe-pipe';
     CallComponentComponent,
     ConnectingViewComponent,
     ChatContainerComponent,
-    HeaderComponent,
-    MessageBodyComponent,
-    ChatMessageComponent,
     CallScreenComponent,
     CallControlsComponent,
     AudioCallGridComponent,

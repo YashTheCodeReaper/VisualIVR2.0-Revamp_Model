@@ -1,4 +1,59 @@
-<div class="chat-container">
-  <app-header></app-header>
-  <app-message-body></app-message-body>
+<div class="chat-container-wrapper">
+  <header class="chat-header">
+    <div class="agent-data">
+      <div class="agent-image-container">
+        <img src="assets/images/chat/header/chat-header-agent-image.png" alt="">
+      </div>
+      <div class="agent-info">
+        <div class="agent-name-status">
+          <h5>Tetherfi Bot</h5>
+          <div class="status">
+            <mat-icon>lens</mat-icon>
+            <p>Online</p>
+          </div>
+        </div>
+        <p>Bot Assistant</p>
+      </div>
+    </div>
+    <div class="call-controls">
+      <mat-icon>videocam</mat-icon>
+      <div class="chat-control-divider"></div>
+      <mat-icon>phone_in_talk</mat-icon>
+      <div class="chat-control-divider"></div>
+      <mat-icon>exit_to_app</mat-icon>
+    </div>
+  </header>
+  <section class="chat-body">
+    <div class="secondary-message">
+      <div class="message-liner"></div>
+      <div class="message">
+        <p>Today</p>
+      </div>
+    </div>
+    <div class="primary-message received">
+      <div class="sender-image-container">
+        <img src="assets/images/chat/header/chat-header-agent-image.png" alt="">
+      </div>
+      <div class="message-content">
+        <div class="sender-info">
+          <h5>Tetherfi Bot</h5>
+          <p>09:26 AM</p>
+        </div>
+        <div class="message-body">
+          <h4>Please fill the details</h4>
+          <p>Please enter all the details in the below form controls to get your data validated.</p>
+        </div>
+      </div>
+    </div>
+    <div class="primary-message received continuous">
+      <div class="message-content">
+        <div class="message-body">
+          <app-credit-card-component></app-credit-card-component>
+          <app-file-upload-component></app-file-upload-component>
+          <app-record-audio-component></app-record-audio-component>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="chat-control"></section>
 </div>
