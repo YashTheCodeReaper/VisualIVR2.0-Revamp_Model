@@ -286,6 +286,11 @@
           font-size: 1.4rem;
           font-weight: 700;
           color: #292c31;
+
+          &::placeholder{
+            font-family: inherit;
+            font-weight: 400;
+          }
         }
       }
 

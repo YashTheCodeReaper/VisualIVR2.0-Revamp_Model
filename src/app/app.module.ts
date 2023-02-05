@@ -21,6 +21,7 @@ import { ParticipantsComponent } from './call-component/call-screen/participants
 import { HttpClientModule } from '@angular/common/http';
 import { CaptchaComponentComponent } from './captcha-component/captcha-component.component';
 import { SafePipeModule } from 'safe-pipe';
+import { SecurityComponentComponent } from './security-component/security-component.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SafePipeModule } from 'safe-pipe';
     AudioCallGridComponent,
     CallElementComponent,
     ParticipantsComponent,
-    CaptchaComponentComponent
+    CaptchaComponentComponent,
+    SecurityComponentComponent
   ],
   imports: [
     BrowserModule,

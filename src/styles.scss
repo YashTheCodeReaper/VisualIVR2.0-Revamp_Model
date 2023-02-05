@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~material-icons/iconfont/material-icons.css';
+@import './assets/styles/themes/default.theme.scss';
 
 :root {
   --white: #ffffff;
@@ -53,6 +54,71 @@ body {
     background: #fafafa;
     border-radius: 1rem;
     box-shadow: 10px 10px 10px rgba($color: #000000, $alpha: 0.01);
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+  position: relative;
+
+  .line {
+    width: 100%;
+    background: #e4e3e7;
+    height: 1px;
+  }
+}
+
+.end-flex {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -1rem;
+
+  .hint-box {
+    mat-icon {
+      width: 2rem;
+      height: 2rem;
+      font-size: 2rem;
+      color: #bbbbbb;
+      cursor: pointer;
+    }
+  }
+
+  .button-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    button {
+      width: 10rem;
+      height: 4rem;
+      outline: none;
+      border: none;
+      font-family: inherit;
+      font-size: 1.2rem;
+      font-weight: 500;
+      border-radius: 5px;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .discard-button {
+      background: #fff;
+      border: 2px solid #e4e3e7;
+    }
+
+    .action-button {
+      background: $main-theme;
+      color: #fff;
+      border: 2px solid $main-theme;
+    }
   }
 }
 
