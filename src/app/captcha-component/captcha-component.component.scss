@@ -3,6 +3,7 @@
 .captcha-wrapper {
   width: 100vw;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: scroll;
   position: relative;
 
@@ -325,6 +326,7 @@
 
   .captcha-full-h {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
 
   .captcha-h-header-normal {
@@ -346,6 +348,7 @@
   }
   .captcha-wrapper{
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
   }
   .captcha-body{
     height: auto !important;

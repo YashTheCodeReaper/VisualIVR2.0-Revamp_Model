@@ -4,6 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background: #e4ebf5;
   background: rgba($color: #000000, $alpha: 0.5);
   display: flex;

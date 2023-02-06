@@ -3,8 +3,33 @@
     <div class="record-video-container">
       <h1>Record your video</h1>
       <h2>Please record your video with your face and also with proper lighting.</h2>
-      <div class="start-recording">
+      <div class="start-recording" (click)="toggleRecorder()">
         <mat-icon>videocam</mat-icon>
+      </div>
+      <div class="divider" *ngIf="filesToUpload.length">
+        <div class="line"></div>
+      </div>
+      <div class="files-flex" *ngIf="filesToUpload.length">
+        <div class="file-box" *ngFor="let file of filesToUpload; let i = index">
+          <!-- <audio controls>
+            <source [src]="file.blobURL">
+          </audio> -->
+          <div class="file-icon-box">
+            <div class="file-icon">
+              <mat-icon>audiotrack</mat-icon>
+            </div>
+          </div>
+          <div class="file-info-progress-flex">
+            <p>{{file.title}}</p>
+            <p>{{file.size}} mb | {{file.duration}} seconds</p>
+          </div>
+          <div class="file-action-box">
+            <div class="file-action" style="width: 100%">
+              <mat-icon (click)="removeFile(i)">close</mat-icon>
+              <mat-icon (click)="toggleVideoPlayer(i)">play_arrow</mat-icon>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="divider">
         <div class="line"></div>
@@ -22,7 +47,7 @@
   </div>
 </div>
 
-<div class="recorder-live-container">
+<div class="recorder-live-container" *ngIf="showRecorderBox">
   <div class="recorder-container">
     <div class="recorder-top-section">
       <div class="info-flex">
@@ -33,22 +58,37 @@
           <p>REC</p>
         </div>
       </div>
-      <mat-icon>close</mat-icon>
+      <mat-icon (click)="toggleRecorder()">close</mat-icon>
     </div>
     <div class="recorder-middle-section">
-      <video #videoSrc [muted]="true" autoplay [controls]="false" disablePictureInPicture controlsList="nodownload"></video>
+      <video #videoSrc [muted]="true" autoplay [controls]="false" disablePictureInPicture
+        controlsList="nodownload"></video>
     </div>
     <div class="recorder-bottom-section">
       <div class="recorder-timer">
-        <div style="--progress: 80" class="progress"></div>
-        <p>00<span>H</span>:00<span>M</span>:00<span>S</span></p>
+        <div style="--progress: {{progress * 100}}" class="progress"></div>
+        <p>{{currentHours.toString().padStart(2, '0')}}<span>H</span>:{{currentMinutes.toString().padStart(2,
+          '0')}}<span>M</span>:{{currentSeconds.toString().padStart(2, '0')}}<span>S</span></p>
         <p>/</p>
-        <p>00<span>H</span>:05<span>M</span>:00<span>S</span></p>
+        <p>{{maxHours.toString().padStart(2, '0')}}<span>H</span>:{{maxMinutes.toString().padStart(2,
+          '0')}}<span>M</span>:{{maxSeconds.toString().padStart(2, '0')}}<span>S</span></p>
       </div>
       <div class="button-flex">
-        <button type="button" class="discard-button">Discard</button>
-        <button type="button" class="action-button">Done</button>
+        <button type="button" class="discard-button" (click)="toggleRecorder()">Discard</button>
+        <button type="button" class="action-button" (click)="stopVideoRecording()">Done</button>
       </div>
     </div>
   </div>
 </div>
+
+<div class="video-player-container" *ngIf="showVideoPlayer">
+  <div class="video-container">
+    <mat-icon (click)="toggleVideoPlayer(0)">close</mat-icon>
+    <video controls>
+      <source [src]="filesToUpload[displaySourceIndex].blobURL">
+    </video>
+  </div>
+</div>
+
+<app-tetherfi-notiland *ngIf="showWarnInfo" [warnMessage]="warnMessage" [warnIcon]="warnIcon"
+  (result)="onCatchResult($event)"></app-tetherfi-notiland>

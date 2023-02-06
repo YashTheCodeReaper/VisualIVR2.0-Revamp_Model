@@ -86,7 +86,7 @@ export class RecordAudioComponentComponent implements OnInit {
         recorderType: RecordRTC.MediaStreamRecorder,
         timeSlice: 1000,
         mimeType: this.recordAudioConfig.defaultMime,
-        audioBitsPerSecond: this.recordAudioConfig.bytesPerSecond,
+        audioBitsPerSecond: this.recordAudioConfig.bitsPerSecond,
       });
       this.recorder.startRecording();
     }
