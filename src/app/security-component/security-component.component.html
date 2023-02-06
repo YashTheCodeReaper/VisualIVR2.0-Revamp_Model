@@ -6,13 +6,20 @@
       <div class="pulse">
         <mat-icon>security</mat-icon>
       </div>
-      <div class="input-flex">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-      </div>
+      <ng-container *ngIf="securityConfig.separatedInput">
+        <div class="input-flex">
+          <input (input)="onSeparatedInputFocus(0)" id="securitySeparatedInput0" type="password" maxlength="1">
+          <input (input)="onSeparatedInputFocus(1)" id="securitySeparatedInput1" type="password" maxlength="1">
+          <input (input)="onSeparatedInputFocus(2)" id="securitySeparatedInput2" type="password" maxlength="1">
+          <input (input)="onSeparatedInputFocus(3)" id="securitySeparatedInput3" type="password" maxlength="1">
+          <input id="securitySeparatedInput4" type="password" maxlength="1">
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!securityConfig.separatedInput">
+        <div class="input-flex not-separated">
+          <input id="securitySeparatedInput0" type="password" maxlength="5">
+        </div>
+      </ng-container>
       <div class="divider">
         <div class="line"></div>
       </div>

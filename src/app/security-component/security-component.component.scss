@@ -94,6 +94,14 @@
       }
     }
   }
+
+  .not-separated{
+    input{
+      width: 20rem;
+      letter-spacing: 1rem;
+      padding-left: 1rem;
+    }
+  }
 }
 
 @keyframes pulse {

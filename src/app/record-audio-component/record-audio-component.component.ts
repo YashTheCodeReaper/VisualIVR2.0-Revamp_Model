@@ -106,6 +106,7 @@ export class RecordAudioComponentComponent implements OnInit {
     this.isRecordActive = false;
     this.recorder.stopRecording();
     this.stopStream();
+    this.resetTimer();
     this.currFileName = '';
     this.currSize = '0.00';
     clearInterval(this.sizeCounter);
