@@ -72,18 +72,18 @@ export class FileUploadComponentComponent implements OnInit {
   }
 
   onDrop(event: any) {
-    event.preventDefault();
-    if (!this.fileuploadConfig.allowMultipleFiles && event.dataTransfer.files.length > 1) {
+    const selectedFiles = event?.dataTransfer?.files || event;
+    if (!this.fileuploadConfig.allowMultipleFiles && selectedFiles.length > 1) {
       this.showWarnInfo = true;
       this.warnMessage = `Multiple files are not allowed to upload!`;
       return;
     }
-    if (event.dataTransfer.files.length === 0) return;
+    if (selectedFiles.length === 0) return;
     this.dragEntered = false;
 
-    Object.keys(event.dataTransfer.files).forEach((key: any) => {
-      const fileExtension = `.${event.dataTransfer.files[key]?.name?.toString().split('.').pop()}`;
-      const fileMime = event.dataTransfer.files[key].type;
+    Object.keys(selectedFiles).forEach((key: any) => {
+      const fileExtension = `.${selectedFiles[key]?.name?.toString().split('.').pop()}`;
+      const fileMime = selectedFiles[key].type;
       let isFileTypeRestricted: boolean = false;
 
       if (this.fileInputTypes.length) {
@@ -108,15 +108,15 @@ export class FileUploadComponentComponent implements OnInit {
         return;
       }
 
-      if (event.dataTransfer.files[key].size > this.fileuploadConfig.maxBytesAllowed) {
+      if (selectedFiles[key].size > this.fileuploadConfig.maxBytesAllowed) {
         this.showWarnInfo = true;
         this.warnMessage = 'Exceeded maximum upload size!';
         return;
       }
 
       this.filesToUpload.push(
-        new File([event.dataTransfer.files[key]], event.dataTransfer.files[key].name, {
-          type: event.dataTransfer.files[key].type,
+        new File([selectedFiles[key]], selectedFiles[key].name, {
+          type: selectedFiles[key].type,
         })
       );
     });

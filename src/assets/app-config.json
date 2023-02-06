@@ -60,7 +60,7 @@
       "allowOnlySecureProtocol": false
     },
     "maxBytesAllowed": 2000000,
-    "allowMultipleFiles": true,
+    "allowMultipleFiles": false,
     "fileTypesAccepted": [".pdf", ".jpg", ".doc", ".docx", ".csv", "text/plain", ".mp4"]
   }
 }

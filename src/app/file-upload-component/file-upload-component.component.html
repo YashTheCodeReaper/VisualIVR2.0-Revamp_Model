@@ -5,6 +5,8 @@
       <h1>Upload KYC Documents</h1>
       <h2>You can also upload multiple files at once</h2>
       <div class="file-upload-drop-box" [ngClass]="{'drag-entered': dragEntered}" (drop)="onDrop($event)">
+        <input class="file-input" #file (change)="onDrop(file.files)" type="file"
+          [multiple]="fileuploadConfig.allowMultipleFiles">
         <div class="upload-info-slider-wrapper">
           <div class="slider-dots">
             <div class="slider-dot slider-dot-0 active-dot"></div>
@@ -136,7 +138,7 @@
           </div>
         </div>
         <h5>Drag files here</h5>
-        <p>or, click on <span>browse</span> to select files from explorer.</p>
+        <p>or, click to select files from explorer.</p>
       </div>
       <p>Files containing extensions {{getAllowedFileTypes()}} are only allowed to upload.</p>
       <div class="files-flex">
