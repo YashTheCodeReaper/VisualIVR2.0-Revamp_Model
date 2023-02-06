@@ -58,6 +58,9 @@
     "uploadFromUrl": {
       "enable": true,
       "allowOnlySecureProtocol": true
-    }
+    },
+    "maxBytesAllowed": 2000000,
+    "allowMultipleFiles": true,
+    "fileTypesAccepted": [".pdf", ".doc", ".docx", ".csv", "text/plain", ".mp4"]
   }
 }

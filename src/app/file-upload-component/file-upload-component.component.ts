@@ -1,3 +1,4 @@
+import { CommonService } from './../services/common.service';
 import { Component, OnInit } from '@angular/core';
 declare var document: any;
 @Component({
@@ -12,7 +13,13 @@ export class FileUploadComponentComponent implements OnInit {
   warnMessage: string = '';
   warnIcon: string = 'warning';
   urlToFetch: string = '';
-  constructor() {}
+  fileuploadConfig: any;
+  fileInputTypes: any;
+
+  constructor(private commonService: CommonService) {
+    this.fileuploadConfig = this.commonService.applicationConfig.fileUploadComponent;
+    this.fileInputTypes = this.fileuploadConfig.fileTypesAccepted;
+  }
 
   ngOnInit(): void {
     this.initiateSlider();
@@ -45,25 +52,67 @@ export class FileUploadComponentComponent implements OnInit {
     }, 2000);
   }
 
+  getAllowedFileTypes(): string {
+    let allowedFileTypeString = '';
+    if (this.fileInputTypes.length) {
+      if (Array.isArray(this.fileInputTypes)) {
+        this.fileInputTypes.forEach((type: any, index: number) => {
+          allowedFileTypeString +=
+            type + `${this.fileInputTypes.length - 2 == index ? ' and ' : ', '}`;
+        });
+      } else {
+        this.fileInputTypes.split(',').forEach((type: any, index: number) => {
+          allowedFileTypeString +=
+            type + `${this.fileInputTypes.length - 2 == index ? ' and ' : ', '}`;
+        });
+      }
+    }
+    return allowedFileTypeString;
+  }
+
   onDrop(event: any) {
     event.preventDefault();
+    if (!this.fileuploadConfig.allowMultipleFiles && event.dataTransfer.files.length > 1) {
+      this.showWarnInfo = true;
+      this.warnMessage = `Multiple files are not allowed to upload!`;
+      return;
+    }
+    if (event.dataTransfer.files.length === 0) return;
     this.dragEntered = false;
+
     Object.keys(event.dataTransfer.files).forEach((key: any) => {
-      if (event.dataTransfer.files[key].size > 2000000) {
+      const fileExtension = `.${event.dataTransfer.files[key]?.name?.toString().split('.').pop()}`;
+      const fileMime = event.dataTransfer.files[key].type;
+      let isFileTypeRestricted: boolean = false;
+
+      if (this.fileInputTypes.length) {
+        if (Array.isArray(this.fileInputTypes)) {
+          isFileTypeRestricted = !this.fileInputTypes.some((type: any) => {
+            if (fileExtension === type || fileMime === type) return true;
+            else return false;
+          });
+        } else {
+          if (
+            this.fileInputTypes.includes(fileExtension) ||
+            (fileMime && this.fileInputTypes.includes(fileMime))
+          )
+            isFileTypeRestricted = false;
+          else isFileTypeRestricted = true;
+        }
+      } else isFileTypeRestricted = false;
+
+      if (isFileTypeRestricted) {
         this.showWarnInfo = true;
-        this.warnMessage = 'Maximum allowed file size is 2mb!';
-        return;
-      } else if (
-        event.dataTransfer.files[key].name.split('.').pop() != 'mp3' &&
-        event.dataTransfer.files[key].name.split('.').pop() != 'pdf' &&
-        event.dataTransfer.files[key].name.split('.').pop() != 'csv' &&
-        event.dataTransfer.files[key].name.split('.').pop() != 'jpeg' &&
-        event.dataTransfer.files[key].name.split('.').pop() != 'png'
-      ) {
-        this.showWarnInfo = true;
-        this.warnMessage = 'Files containing extensions .mp3, .pdf, .csv, .jpeg and .png are only allowed to upload!';
+        this.warnMessage = `Files containing extensions ${fileExtension} are not allowed to upload!`;
         return;
       }
+
+      if (event.dataTransfer.files[key].size > this.fileuploadConfig.maxBytesAllowed) {
+        this.showWarnInfo = true;
+        this.warnMessage = 'Exceeded maximum upload size!';
+        return;
+      }
+
       this.filesToUpload.push(
         new File([event.dataTransfer.files[key]], event.dataTransfer.files[key].name, {
           type: event.dataTransfer.files[key].type,
@@ -100,17 +149,26 @@ export class FileUploadComponentComponent implements OnInit {
   }
 
   fetchFile() {
-    if (
-      this.urlToFetch.split('.').pop() != 'mp3' &&
-      this.urlToFetch.split('.').pop() != 'pdf' &&
-      this.urlToFetch.split('.').pop() != 'csv' &&
-      this.urlToFetch.split('.').pop() != 'jpeg' &&
-      this.urlToFetch.split('.').pop() != 'png'
-    ) {
+    let isFileTypeRestricted = true;
+    if (this.fileInputTypes.length) {
+      if (Array.isArray(this.fileInputTypes)) {
+        this.fileInputTypes.forEach((type: any) => {
+          if (this.urlToFetch.split('.').pop()?.includes(type.replace('.', ''))) isFileTypeRestricted = false;
+        });
+      } else {
+        if (this.fileInputTypes.includes(this.urlToFetch.split('.').pop()))
+          isFileTypeRestricted = false;
+      }
+    }
+
+    if (isFileTypeRestricted) {
       this.showWarnInfo = true;
-      this.warnMessage = 'Files containing extensions .mp3, .pdf, .csv, .jpeg and .png are only allowed to upload!';
+      this.warnMessage = `Files containing extension ${this.urlToFetch
+        .split('.')
+        .pop()} are not allowed to upload!`;
       return;
     }
+
     var request = new XMLHttpRequest();
     request.open('GET', `https://${this.urlToFetch}`, true);
     request.responseType = 'blob';
@@ -134,7 +192,7 @@ export class FileUploadComponentComponent implements OnInit {
               this.warnMessage = 'Maximum allowed file size is 2mb!';
               return;
             }
-            console.log(file)
+            console.log(file);
             this.filesToUpload.push(file);
             this.urlToFetch = '';
           });
@@ -143,13 +201,16 @@ export class FileUploadComponentComponent implements OnInit {
     request.send();
   }
 
-  onPasteURL(){
-    if(this.urlToFetch.includes('http://')){
+  onPasteURL() {
+    if (
+      this.fileuploadConfig.uploadFromUrl.allowOnlySecureProtocol &&
+      this.urlToFetch.includes('http://')
+    ) {
       this.urlToFetch = '';
       this.showWarnInfo = true;
       this.warnMessage = 'Only urls with secured protocols are allowed to fetch!';
       return;
-    }else if(!this.urlToFetch.includes('https://')){
+    } else if (!this.urlToFetch.includes('https://') && !this.urlToFetch.includes('http://')) {
       this.urlToFetch = '';
       this.showWarnInfo = true;
       this.warnMessage = 'Please enter a valid url to fetch!';
@@ -158,8 +219,8 @@ export class FileUploadComponentComponent implements OnInit {
     this.urlToFetch = this.urlToFetch.replace(/(^\w+:|^)\/\//, '');
   }
 
-  onFetchClick(){
-    if(!this.urlToFetch){
+  onFetchClick() {
+    if (!this.urlToFetch) {
       this.showWarnInfo = true;
       this.warnMessage = 'Please enter valid url to fetch!';
       return;

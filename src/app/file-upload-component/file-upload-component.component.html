@@ -138,7 +138,7 @@
         <h5>Drag files here</h5>
         <p>or, click on <span>browse</span> to select files from explorer.</p>
       </div>
-      <p>Files containing extensions .mp3, .pdf, .csv, .jpeg and .png are only allowed to upload.</p>
+      <p>Files containing extensions {{getAllowedFileTypes()}} are only allowed to upload.</p>
       <div class="files-flex">
         <div class="file-box" *ngFor="let file of filesToUpload; let i = index">
           <div class="file-icon-box">
@@ -157,24 +157,27 @@
           </div>
         </div>
       </div>
-      <div class="divider">
-        <div class="line"></div>
-        <span>OR</span>
-      </div>
-      <div class="upload-from-url-wrapper">
-        <p>Upload from URL</p>
-        <div class="url-box">
-          <div class="protocol-box">
-            <p>https://</p>
-          </div>
-          <div class="url-text-box">
-            <input (input)="onPasteURL()" [(ngModel)]="urlToFetch" type="text" placeholder="Paste your URL here which has the file">
-          </div>
-          <div class="upload-box">
-            <button (click)="onFetchClick()" type="button">Fetch</button>
+      <ng-container *ngIf="fileuploadConfig.uploadFromUrl.enable">
+        <div class="divider">
+          <div class="line"></div>
+          <span>OR</span>
+        </div>
+        <div class="upload-from-url-wrapper">
+          <p>Upload from URL</p>
+          <div class="url-box">
+            <div class="protocol-box">
+              <p>https://</p>
+            </div>
+            <div class="url-text-box">
+              <input (input)="onPasteURL()" [(ngModel)]="urlToFetch" type="text"
+                placeholder="Paste your URL here which has the file">
+            </div>
+            <div class="upload-box">
+              <button (click)="onFetchClick()" type="button">Fetch</button>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
       <div class="divider">
         <div class="line"></div>
       </div>
