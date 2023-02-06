@@ -1,0 +1,54 @@
+<div class="main-wrapper">
+  <div class="message-wrapper">
+    <div class="record-video-container">
+      <h1>Record your video</h1>
+      <h2>Please record your video with your face and also with proper lighting.</h2>
+      <div class="start-recording">
+        <mat-icon>videocam</mat-icon>
+      </div>
+      <div class="divider">
+        <div class="line"></div>
+      </div>
+      <div class="end-flex">
+        <div class="hint-box">
+          <mat-icon>info</mat-icon>
+        </div>
+        <div class="button-flex">
+          <button type="button" class="discard-button">Discard</button>
+          <button type="button" class="action-button">Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="recorder-live-container">
+  <div class="recorder-container">
+    <div class="recorder-top-section">
+      <div class="info-flex">
+        <mat-icon>info</mat-icon>
+        <h5>Video Recorder</h5>
+        <div class="rec-info-button" [ngClass]="{'rec-info-blink': recording}">
+          <div class="rec-dot"></div>
+          <p>REC</p>
+        </div>
+      </div>
+      <mat-icon>close</mat-icon>
+    </div>
+    <div class="recorder-middle-section">
+      <video #videoSrc [muted]="true" autoplay [controls]="false" disablePictureInPicture controlsList="nodownload"></video>
+    </div>
+    <div class="recorder-bottom-section">
+      <div class="recorder-timer">
+        <div style="--progress: 80" class="progress"></div>
+        <p>00<span>H</span>:00<span>M</span>:00<span>S</span></p>
+        <p>/</p>
+        <p>00<span>H</span>:05<span>M</span>:00<span>S</span></p>
+      </div>
+      <div class="button-flex">
+        <button type="button" class="discard-button">Discard</button>
+        <button type="button" class="action-button">Done</button>
+      </div>
+    </div>
+  </div>
+</div>

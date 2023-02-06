@@ -1,0 +1,27 @@
+.home-wrapper{
+  width: 100vw;
+  padding: 2rem;
+  overflow: scroll;
+  background: #fafafa;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+
+  .component-router{
+    width: 100%;
+    height: 8rem;
+    background: #fff;
+    box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar{
+    display: none;
+  }
+}

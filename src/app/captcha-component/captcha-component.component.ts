@@ -1,3 +1,4 @@
+import { CommonService } from './../services/common.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Captcha } from '../interfaces/captcha.interface';
@@ -20,44 +21,46 @@ export class CaptchaComponentComponent implements OnInit {
   maxSliderIndex: number = 0;
   sliderIntervalFunction: any;
 
-  constructor(private http: HttpClient, private renderer: Renderer2) {
-    this.http.get('assets/app-config.json').subscribe((configData: Captcha | any) => {
-      this.captchaConfig = configData.captchaConfig;
+  constructor(
+    private http: HttpClient,
+    private renderer: Renderer2,
+    private commonService: CommonService
+  ) {
+    this.captchaConfig = this.commonService.applicationConfig.captchaConfig;
 
-      if (
-        this.captchaConfig.captchaHeader.enable &&
-        !this.captchaConfig.captchaHeader.pathToSource.includes('http')
-      ) {
-        this.http.get(this.captchaConfig.captchaHeader.pathToSource).subscribe((content: any) => {
-          this.captchaHeaderSourceContent = content.captchaHeaderContent;
-        });
-      }
+    if (
+      this.captchaConfig.captchaHeader.enable &&
+      !this.captchaConfig.captchaHeader.pathToSource.includes('http')
+    ) {
+      this.http.get(this.captchaConfig.captchaHeader.pathToSource).subscribe((content: any) => {
+        this.captchaHeaderSourceContent = content.captchaHeaderContent;
+      });
+    }
 
-      if (
-        this.captchaConfig.captchaFooter.enable &&
-        !this.captchaConfig.captchaFooter.pathToSource.includes('http')
-      ) {
-        this.http.get(this.captchaConfig.captchaFooter.pathToSource).subscribe((content: any) => {
-          this.captchaFooterSourceContent = content.captchaFooterContent;
-        });
-      }
+    if (
+      this.captchaConfig.captchaFooter.enable &&
+      !this.captchaConfig.captchaFooter.pathToSource.includes('http')
+    ) {
+      this.http.get(this.captchaConfig.captchaFooter.pathToSource).subscribe((content: any) => {
+        this.captchaFooterSourceContent = content.captchaFooterContent;
+      });
+    }
 
-      if (
-        this.captchaConfig.captchaCarousel.enable &&
-        this.captchaConfig.captchaCarousel.carouselContentPathArray.length
-      ) {
-        this.captchaConfig.captchaCarousel.carouselContentPathArray.forEach(
-          (content: any, index: number) => {
-            this.http.get(content).subscribe((carouselContent: any) => {
-              this.carouselContentArray.push(carouselContent);
-              this.maxSliderIndex = this.carouselContentArray.length;
-              if (index == this.captchaConfig.captchaCarousel.carouselContentPathArray.length - 1)
-                this.initSlider();
-            });
-          }
-        );
-      }
-    });
+    if (
+      this.captchaConfig.captchaCarousel.enable &&
+      this.captchaConfig.captchaCarousel.carouselContentPathArray.length
+    ) {
+      this.captchaConfig.captchaCarousel.carouselContentPathArray.forEach(
+        (content: any, index: number) => {
+          this.http.get(content).subscribe((carouselContent: any) => {
+            this.carouselContentArray.push(carouselContent);
+            this.maxSliderIndex = this.carouselContentArray.length;
+            if (index == this.captchaConfig.captchaCarousel.carouselContentPathArray.length - 1)
+              this.initSlider();
+          });
+        }
+      );
+    }
   }
 
   ngOnInit(): void {}

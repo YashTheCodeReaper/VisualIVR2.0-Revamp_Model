@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { CommonService } from './services/common.service';
+import { AppRoutingModule } from './app-routing.module';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatIconModule} from '@angular/material/icon';
-
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { CreditCardComponentComponent } from './credit-card-component/credit-card-component.component';
@@ -22,6 +23,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { CaptchaComponentComponent } from './captcha-component/captcha-component.component';
 import { SafePipeModule } from 'safe-pipe';
 import { SecurityComponentComponent } from './security-component/security-component.component';
+import { RecordVideoComponentComponent } from './record-video-component/record-video-component.component';
+import { HomeComponent } from './home/home.component';
+
+export function initConfig(commonService: CommonService){
+  return async () => await commonService.initConfig()
+}
 
 @NgModule({
   declarations: [
@@ -39,18 +46,28 @@ import { SecurityComponentComponent } from './security-component/security-compon
     CallElementComponent,
     ParticipantsComponent,
     CaptchaComponentComponent,
-    SecurityComponentComponent
+    SecurityComponentComponent,
+    RecordVideoComponentComponent,
+    HomeComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatIconModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    SafePipeModule
+    SafePipeModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initConfig,
+      deps: [CommonService],
+      multi: true
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

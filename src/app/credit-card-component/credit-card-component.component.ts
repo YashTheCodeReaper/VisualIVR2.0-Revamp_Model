@@ -1,5 +1,6 @@
+import { CommonService } from './../services/common.service';
 import { OcrService } from './../services/ocr.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,19 +9,57 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./credit-card-component.component.scss'],
 })
 export class CreditCardComponentComponent implements OnInit {
+  @ViewChild('creditCardExpiry') creditCardExpiryEl!: ElementRef;
+  @ViewChild('creditCardCvv') creditCardCvvEl!: ElementRef;
+  @ViewChild('creditCardName') creditCardNameEl!: ElementRef;
   creditCardGroup!: FormGroup;
   creditCardType: string = 'MASTERCARD';
+  creditcardConfig: any;
+  controlIndex: number = 0;
 
-  constructor(private ocrService: OcrService) {
+  constructor(private ocrService: OcrService, private commonService: CommonService) {
+    this.creditcardConfig = this.commonService.applicationConfig.creditCardComponent;
+
     this.creditCardGroup = new FormGroup({
       nameOnCard: new FormControl('', [Validators.required, Validators.minLength(5)]),
       cardNumber: new FormControl('', [Validators.required, Validators.minLength(19)]),
-      cardExpiry: new FormControl('', [Validators.required, Validators.pattern('^(0[1-9]|1[0-2])/?([0-9]{2})$')]),
-      cardCvv: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(3)]),
+      cardExpiry: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^(0[1-9]|1[0-2])/?([0-9]{2})$'),
+      ]),
+      cardCvv: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[0-9]*$'),
+        Validators.minLength(3),
+      ]),
     });
   }
 
   ngOnInit(): void {}
+
+  autoProceedToNextControl() {
+    switch (this.controlIndex) {
+      case 0: {
+        if (this.creditCardGroup.controls['cardNumber'].valid)
+          this.creditCardExpiryEl.nativeElement.focus();
+        break;
+      }
+      case 1: {
+        if (this.creditCardGroup.controls['cardExpiry'].valid)
+          this.creditCardCvvEl.nativeElement.focus();
+        break;
+      }
+      case 2: {
+        if (this.creditCardGroup.controls['cardCvv'].valid)
+          this.creditCardNameEl.nativeElement.focus();
+        break;
+      }
+    }
+  }
+
+  setControlIndex(index: number) {
+    this.controlIndex = index;
+  }
 
   findCreditCardType(cc: string) {
     let amex = new RegExp('^3[47][0-9]{13}$');
@@ -68,8 +107,10 @@ export class CreditCardComponentComponent implements OnInit {
 
   validateControl(controlName: string) {
     return (
-      (this.creditCardGroup.controls[controlName].touched && this.creditCardGroup.controls[controlName].errors) ||
-      (!this.creditCardGroup.controls[controlName].pristine && this.creditCardGroup.controls[controlName].invalid)
+      (this.creditCardGroup.controls[controlName].touched &&
+        this.creditCardGroup.controls[controlName].errors) ||
+      (!this.creditCardGroup.controls[controlName].pristine &&
+        this.creditCardGroup.controls[controlName].invalid)
     );
   }
 
@@ -78,7 +119,10 @@ export class CreditCardComponentComponent implements OnInit {
   }
 
   showWarningIndicator(controlName: string) {
-    return this.creditCardGroup.controls[controlName].touched && this.creditCardGroup.controls[controlName].invalid;
+    return (
+      this.creditCardGroup.controls[controlName].touched &&
+      this.creditCardGroup.controls[controlName].invalid
+    );
   }
 
   onExpiryInput(event: any) {
@@ -117,8 +161,10 @@ export class CreditCardComponentComponent implements OnInit {
     const regex = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g;
     const onlyNumbers = event.target.value.replace(/[^\d]/g, '');
 
-    event.target.value = onlyNumbers.replace(regex, (regex: any, $1: any, $2: any, $3: any, $4: any) =>
-      [$1, $2, $3, $4].filter((group) => !!group).join(' ')
+    event.target.value = onlyNumbers.replace(
+      regex,
+      (regex: any, $1: any, $2: any, $3: any, $4: any) =>
+        [$1, $2, $3, $4].filter((group) => !!group).join(' ')
     );
 
     this.creditCardType = this.findCreditCardType(event.target.value.replaceAll(' ', ''));

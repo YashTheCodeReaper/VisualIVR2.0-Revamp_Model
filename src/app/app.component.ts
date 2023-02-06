@@ -1,3 +1,4 @@
+import { CommonService } from './services/common.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'vivr2.0-revamp';
+
+  constructor(private commonService: CommonService){}
 }

@@ -43,16 +43,20 @@ body {
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .main-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background: #fafafa;
   display: flex;
   align-items: center;
   justify-content: center;
 
   .message-wrapper {
     width: 50rem;
+    background: #fff;
     height: auto;
     padding: 2rem;
-    background: #fafafa;
     border-radius: 1rem;
+    border: 1px solid #e5e5e5;
     box-shadow: 10px 10px 10px rgba($color: #000000, $alpha: 0.01);
   }
 }
@@ -89,36 +93,36 @@ body {
       cursor: pointer;
     }
   }
+}
 
-  .button-flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+.button-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 
-    button {
-      width: 10rem;
-      height: 4rem;
-      outline: none;
-      border: none;
-      font-family: inherit;
-      font-size: 1.2rem;
-      font-weight: 500;
-      border-radius: 5px;
-      border: 2px solid transparent;
-      cursor: pointer;
-    }
+  button {
+    width: 10rem;
+    height: 4rem;
+    outline: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
 
-    .discard-button {
-      background: #fff;
-      border: 2px solid #e4e3e7;
-    }
+  .discard-button {
+    background: #fff;
+    border: 2px solid #e4e3e7;
+  }
 
-    .action-button {
-      background: $main-theme;
-      color: #fff;
-      border: 2px solid $main-theme;
-    }
+  .action-button {
+    background: $main-theme;
+    color: #fff;
+    border: 2px solid $main-theme;
   }
 }
 

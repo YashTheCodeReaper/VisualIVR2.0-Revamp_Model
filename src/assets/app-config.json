@@ -49,5 +49,15 @@
       "enable": true,
       "pathToSource": "assets/html/captcha/captcha-footer.json"
     }
+  },
+  "creditCardComponent": {
+    "virtualCard": true,
+    "autoFocusOnSuccessiveEntry": true
+  },
+  "fileUploadComponent": {
+    "uploadFromUrl": {
+      "enable": true,
+      "allowOnlySecureProtocol": true
+    }
   }
 }
