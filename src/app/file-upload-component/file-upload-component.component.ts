@@ -73,9 +73,26 @@ export class FileUploadComponentComponent implements OnInit {
 
   onDrop(event: any) {
     const selectedFiles = event?.dataTransfer?.files || event;
-    if (!this.fileuploadConfig.allowMultipleFiles && selectedFiles.length > 1) {
+    if (!this.fileuploadConfig.allowMultipleFiles.enable && selectedFiles.length > 1) {
       this.showWarnInfo = true;
       this.warnMessage = `Multiple files are not allowed to upload!`;
+      return;
+    } else if (
+      this.fileuploadConfig.allowMultipleFiles.enable &&
+      this.filesToUpload.length == 0 &&
+      selectedFiles.length > this.fileuploadConfig.allowMultipleFiles.maxLimit
+    ) {
+      this.showWarnInfo = true;
+      this.warnMessage = `Maximum of ${this.fileuploadConfig.allowMultipleFiles.maxLimit} can only be uploaded!`;
+      return;
+    } else if (
+      this.fileuploadConfig.allowMultipleFiles.enable &&
+      this.filesToUpload.length &&
+      (this.filesToUpload.length >= this.fileuploadConfig.allowMultipleFiles.maxLimit ||
+        selectedFiles.length >= this.fileuploadConfig.allowMultipleFiles.maxLimit)
+    ) {
+      this.showWarnInfo = true;
+      this.warnMessage = `Maximum of ${this.fileuploadConfig.allowMultipleFiles.maxLimit} can only be uploaded!`;
       return;
     }
     if (selectedFiles.length === 0) return;

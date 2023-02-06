@@ -60,7 +60,18 @@
       "allowOnlySecureProtocol": false
     },
     "maxBytesAllowed": 2000000,
-    "allowMultipleFiles": false,
+    "allowMultipleFiles": {
+      "enable": true,
+      "maxLimit": 3
+    },
     "fileTypesAccepted": [".pdf", ".jpg", ".doc", ".docx", ".csv", "text/plain", ".mp4"]
+  },
+  "recordAudioComponent": {
+    "allowMultipleRecording": {
+      "enable": true,
+      "maxLimit": 3
+    },
+    "bytesPerSecond": 128000,
+    "defaultMime": "audio/mp3"
   }
 }

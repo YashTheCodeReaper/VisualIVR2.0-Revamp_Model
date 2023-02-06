@@ -11,7 +11,8 @@
           </div>
           <div class="rec-timer">
             <p>{{currHour}}<span>H</span>:{{currMin}}<span>M</span>:{{currSecond}}<span>S</span></p>
-            <p>WEBM <span></span> 128kbps</p>
+            <p>{{recordAudioConfig.defaultMime.split('/')[1].toUpperCase()}} <span></span>
+              {{recordAudioConfig.bytesPerSecond / 1000}}kbps</p>
           </div>
         </div>
         <div class="right-controls">
@@ -72,3 +73,6 @@
     </div>
   </div>
 </div>
+
+<app-tetherfi-notiland *ngIf="showWarnInfo" [warnMessage]="warnMessage" [warnIcon]="warnIcon"
+  (result)="onCatchResult($event)"></app-tetherfi-notiland>

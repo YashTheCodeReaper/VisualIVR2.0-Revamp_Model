@@ -6,7 +6,7 @@
       <h2>You can also upload multiple files at once</h2>
       <div class="file-upload-drop-box" [ngClass]="{'drag-entered': dragEntered}" (drop)="onDrop($event)">
         <input class="file-input" #file (change)="onDrop(file.files)" type="file"
-          [multiple]="fileuploadConfig.allowMultipleFiles">
+          [multiple]="fileuploadConfig.allowMultipleFiles.enable" accept="{{fileInputTypes}}">
         <div class="upload-info-slider-wrapper">
           <div class="slider-dots">
             <div class="slider-dot slider-dot-0 active-dot"></div>

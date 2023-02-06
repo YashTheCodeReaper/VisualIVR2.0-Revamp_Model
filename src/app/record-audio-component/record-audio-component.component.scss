@@ -211,7 +211,7 @@
       position: relative;
       justify-content: space-between;
 
-      audio{
+      audio {
         position: absolute;
         opacity: 0;
       }
@@ -296,5 +296,15 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .record-audio-container .audio-player .left-info .rec-timer p{
+    font-size: 1.6rem;
+
+    span{
+      font-size: 1.2rem;
+    }
   }
 }

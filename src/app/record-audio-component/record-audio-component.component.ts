@@ -1,3 +1,4 @@
+import { CommonService } from './../services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as RecordRTC from 'recordrtc';
@@ -22,22 +23,50 @@ export class RecordAudioComponentComponent implements OnInit {
   sizeCounter: any;
   filesToUpload: any[] = [];
   stream: any;
+  recordAudioConfig: any;
+  showWarnInfo: boolean = false;
+  warnMessage: string = '';
+  warnIcon: string = 'warning';
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer, private commonService: CommonService) {
+    this.recordAudioConfig = this.commonService.applicationConfig.recordAudioComponent;
+  }
 
   ngOnInit(): void {
     this.simulateVisualizer();
   }
 
   async toggleRecording() {
+    if (!this.recordAudioConfig.allowMultipleRecording.enable && this.filesToUpload.length) {
+      this.showWarnInfo = true;
+      this.warnMessage = `Multiple recordings are not allowed!`;
+      return;
+    } else if (
+      this.recordAudioConfig.allowMultipleRecording.enable &&
+      this.filesToUpload.length >= this.recordAudioConfig.allowMultipleRecording.maxLimit
+    ) {
+      this.showWarnInfo = true;
+      this.warnMessage = `Maximum of ${this.recordAudioConfig.allowMultipleRecording.maxLimit} could only be recorded!`;
+      return;
+    }
     if (this.isRecordActive) {
-      this.resetTimer();
       this.recorder.stopRecording(async () => {
         let blob = await this.recorder.getBlob();
         console.log(blob);
-        const fileName = encodeURIComponent('audioRecord_' + new Date().getTime() + '.webm');
+        const fileName = encodeURIComponent(
+          'audioRecord_' +
+            new Date().getTime() +
+            `.${this.recordAudioConfig.defaultMime.split('/')[1]}`
+        );
         const duration = this.currSecond;
-        this.filesToUpload.push({blob: blob, blobURL: this.getBlobURL(blob), duration: this.currSecond, title: fileName, size: (blob.size/1000000).toFixed(2)})
+        this.filesToUpload.push({
+          blob: blob,
+          blobURL: this.getBlobURL(blob),
+          duration: duration,
+          title: fileName,
+          size: (blob.size / 1000000).toFixed(2),
+        });
+        this.resetTimer();
       });
       this.stopStream();
       this.currFileName = '';
@@ -46,14 +75,18 @@ export class RecordAudioComponentComponent implements OnInit {
     }
     this.isRecordActive = !this.isRecordActive;
     if (this.isRecordActive) {
-      this.currFileName = encodeURIComponent('audioRecord_' + new Date().getTime() + '.webm');
+      this.currFileName = encodeURIComponent(
+        'audioRecord_' +
+          new Date().getTime() +
+          `.${this.recordAudioConfig.defaultMime.split('/')[1]}`
+      );
       this.stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
       this.recorder = new RecordRTC(this.stream, {
         type: 'audio',
         recorderType: RecordRTC.MediaStreamRecorder,
         timeSlice: 1000,
-        mimeType: 'audio/webm',
-        audioBitsPerSecond: 128000,
+        mimeType: this.recordAudioConfig.defaultMime,
+        audioBitsPerSecond: this.recordAudioConfig.bytesPerSecond,
       });
       this.recorder.startRecording();
     }
@@ -62,7 +95,7 @@ export class RecordAudioComponentComponent implements OnInit {
       var internal = this.recorder.getInternalRecorder();
       if (internal && internal.getArrayOfBlobs) {
         var blob = new Blob(internal.getArrayOfBlobs(), {
-          type: 'audio/webm',
+          type: this.recordAudioConfig.defaultMime,
         });
         this.currSize = (blob.size / 1000000).toFixed(2);
       }
@@ -71,7 +104,6 @@ export class RecordAudioComponentComponent implements OnInit {
 
   async stopRecording() {
     this.isRecordActive = false;
-    this.resetTimer();
     this.recorder.stopRecording();
     this.stopStream();
     this.currFileName = '';
@@ -111,7 +143,10 @@ export class RecordAudioComponentComponent implements OnInit {
       analyserNode.getByteFrequencyData(data);
 
       elNodes.forEach((node: any, i: any) => {
-        node.style.setProperty('--level', this.isRecordActive ? (data[i] / 255) * (1 + i / numberOfNodes) : '0.0833');
+        node.style.setProperty(
+          '--level',
+          this.isRecordActive ? (data[i] / 255) * (1 + i / numberOfNodes) : '0.0833'
+        );
       });
     };
 
@@ -129,7 +164,6 @@ export class RecordAudioComponentComponent implements OnInit {
       audioCtx.resume();
       startStream();
       if (this.isRecordActive) this.timerCount();
-      else this.resetTimer();
     });
   }
 
@@ -155,9 +189,16 @@ export class RecordAudioComponentComponent implements OnInit {
     this.timerSub.unsubscribe();
   }
 
-  removeFile(index: number) {}
+  removeFile(index: number) {
+    this.filesToUpload.splice(index, 1);
+  }
 
-  getBlobURL(blob: any){
+  getBlobURL(blob: any) {
     return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
+  }
+
+  onCatchResult(result: boolean) {
+    this.showWarnInfo = false;
+    this.warnMessage = '';
   }
 }
