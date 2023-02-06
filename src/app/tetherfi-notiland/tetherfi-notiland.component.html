@@ -1,5 +1,5 @@
 <div class="notiland-notch-box" *ngIf="warnMessage && warnIcon && !isCall">
-  <div class="notch" [ngClass]="{'expanded-notch': isNotchClicked, 'notch-hover': !isNotchClicked}" (click)="onNotchClick()">
+  <div class="notch" [ngClass]="{'expanded-notch': isNotchClicked, 'notch-hover': isNotchMiniExpanded}" (click)="onNotchClick()">
     <mat-icon>{{warnIcon}}</mat-icon>
     <div class="content-main">
       <p>{{warnMessage}}</p>

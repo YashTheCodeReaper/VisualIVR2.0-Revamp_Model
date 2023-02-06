@@ -57,10 +57,10 @@
   "fileUploadComponent": {
     "uploadFromUrl": {
       "enable": true,
-      "allowOnlySecureProtocol": true
+      "allowOnlySecureProtocol": false
     },
     "maxBytesAllowed": 2000000,
     "allowMultipleFiles": true,
-    "fileTypesAccepted": [".pdf", ".doc", ".docx", ".csv", "text/plain", ".mp4"]
+    "fileTypesAccepted": [".pdf", ".jpg", ".doc", ".docx", ".csv", "text/plain", ".mp4"]
   }
 }

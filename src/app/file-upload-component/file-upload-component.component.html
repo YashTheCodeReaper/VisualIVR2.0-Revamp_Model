@@ -166,7 +166,7 @@
           <p>Upload from URL</p>
           <div class="url-box">
             <div class="protocol-box">
-              <p>https://</p>
+              <p>{{fetchProtocol}}</p>
             </div>
             <div class="url-text-box">
               <input (input)="onPasteURL()" [(ngModel)]="urlToFetch" type="text"

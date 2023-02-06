@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 })
 export class TetherfiNotilandComponent implements OnInit, OnDestroy {
   isNotchClicked: boolean = false;
+  isNotchMiniExpanded: boolean = false;
   @Input('warnMessage') warnMessage!: string;
   @Input('warnIcon') warnIcon!: string;
   @Input('isCall') isCall!: boolean;
@@ -17,9 +18,14 @@ export class TetherfiNotilandComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.warnMessage = '';
     this.warnIcon = '';
+    this.isNotchMiniExpanded = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isNotchMiniExpanded = true;
+    }, 250);
+  }
 
   onNotchClick() {
     this.isNotchClicked = true;

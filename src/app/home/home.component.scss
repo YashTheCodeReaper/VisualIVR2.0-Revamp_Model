@@ -3,12 +3,14 @@
   padding: 2rem;
   overflow: scroll;
   background: #fafafa;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 2rem;
 
   .component-router{
-    width: 100%;
+    width: 35rem;
     height: 8rem;
     background: #fff;
     box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: 0.03);

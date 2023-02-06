@@ -15,6 +15,7 @@ export class FileUploadComponentComponent implements OnInit {
   urlToFetch: string = '';
   fileuploadConfig: any;
   fileInputTypes: any;
+  fetchProtocol: string = 'https://';
 
   constructor(private commonService: CommonService) {
     this.fileuploadConfig = this.commonService.applicationConfig.fileUploadComponent;
@@ -153,7 +154,8 @@ export class FileUploadComponentComponent implements OnInit {
     if (this.fileInputTypes.length) {
       if (Array.isArray(this.fileInputTypes)) {
         this.fileInputTypes.forEach((type: any) => {
-          if (this.urlToFetch.split('.').pop()?.includes(type.replace('.', ''))) isFileTypeRestricted = false;
+          if (this.urlToFetch.split('.').pop()?.includes(type.replace('.', '')))
+            isFileTypeRestricted = false;
         });
       } else {
         if (this.fileInputTypes.includes(this.urlToFetch.split('.').pop()))
@@ -216,6 +218,8 @@ export class FileUploadComponentComponent implements OnInit {
       this.warnMessage = 'Please enter a valid url to fetch!';
       return;
     }
+    if (this.urlToFetch.includes('http://')) this.fetchProtocol = 'http://';
+    else this.fetchProtocol = 'https://';
     this.urlToFetch = this.urlToFetch.replace(/(^\w+:|^)\/\//, '');
   }
 

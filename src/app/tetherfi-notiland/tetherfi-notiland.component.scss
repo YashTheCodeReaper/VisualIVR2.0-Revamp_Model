@@ -82,19 +82,17 @@
   }
 
   .notch-hover {
-    &:hover {
-      width: 100%;
+    width: 100%;
 
-      mat-icon {
-        left: 8%;
-      }
+    mat-icon {
+      left: 8%;
+    }
 
-      .content-main {
-        width: 20rem;
+    .content-main {
+      width: 20rem;
 
-        p {
-          animation: textAnimation 30s linear infinite;
-        }
+      p {
+        animation: textAnimation 30s linear infinite;
       }
     }
   }
@@ -150,7 +148,7 @@
   justify-content: space-between;
   padding: 1rem;
 
-  .call-icon-info{
+  .call-icon-info {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -170,7 +168,7 @@
         0em 0.05em 0.1em rgba(#000000, 0.05);
       transform: translate3d(0, 0, 0) scale(1);
 
-      mat-icon{
+      mat-icon {
         width: 1.8rem;
         height: 1.8rem;
         font-size: 1.8rem;
@@ -187,7 +185,7 @@
       animation: phone-outer 3000ms infinite;
     }
 
-    .call-info{
+    .call-info {
       height: 100%;
       width: auto;
       display: flex;
@@ -195,14 +193,14 @@
       align-items: flex-start;
       justify-content: center;
 
-      p{
+      p {
         font-size: 1rem;
         text-transform: uppercase;
         font-weight: 400;
         color: #fff;
       }
 
-      h5{
+      h5 {
         font-size: 1.4rem;
         text-transform: uppercase;
         font-weight: 800;
@@ -215,13 +213,13 @@
     }
   }
 
-  .call-actions{
+  .call-actions {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
 
-    .action-button{
+    .action-button {
       width: 4rem;
       height: 4rem;
       border-radius: 50%;
@@ -231,18 +229,18 @@
       cursor: pointer;
       box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.05);
 
-      mat-icon{
+      mat-icon {
         width: 2rem;
         height: 2rem;
         font-size: 2rem;
         color: #fff;
       }
 
-      &:first-child{
+      &:first-child {
         background: #268542;
       }
 
-      &:last-child{
+      &:last-child {
         background: #de2829;
       }
     }
